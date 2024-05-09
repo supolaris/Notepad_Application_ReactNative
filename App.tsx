@@ -1,10 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
+import MyNativeStack from "./src/components/navigation/nativeStack/nativeStack";
 
 const App = () =>{
   return(
-    <View>
-      <Text>Notepad app</Text>
-    </View>
+    <MyNativeStack />
   )
 }
 
