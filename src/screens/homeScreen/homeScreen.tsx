@@ -40,57 +40,68 @@ const HomeScreen = () => {
 
                     <View style={styles.catagoriesView}>
                         <View style={styles.catagoryOneView}>
-                            <View style={styles.imageView}>
-                                <Image
-                                    style={[styles.image, {marginBottom: 2}]}
-                                    source={require('../../../assets/images/houseCatagory.png')}
-                                />
-                            </View>
-                            <View style={styles.catgoriesTitleView}>
-                                <Text style={[styles.catagoriesTitleText, {borderBottomRightRadius: 20}]}>Home</Text>
-                            </View>
+
+                            <Pressable
+                                onPress={() => navigation.navigate('DisplayNotes_Screen', { catagoryName: 'HomeNotes' })}>
+                                <View style={styles.imageView}>
+                                    <Image
+                                        style={[styles.image, { marginBottom: 2 }]}
+                                        source={require('../../../assets/images/houseCatagory.png')}/>
+                                </View>
+                                <View style={styles.catgoriesTitleView}>
+                                    <Text style={[styles.catagoriesTitleText, { borderBottomRightRadius: 20 }]}>Home</Text>
+                                </View>
+                            </Pressable>
+
                         </View>
 
                         <View style={styles.catagoryTwoView}>
-                            <View style={styles.imageView}>
-                                <Image
-                                    style={styles.image}
-                                    source={require('../../../assets/images/officeCatagory.png')}
-                                />
-                            </View>
-                            <View style={styles.catgoriesTitleView}>
-                                <Text style={[styles.catagoriesTitleText, {borderBottomLeftRadius: 20}]}>Office</Text>
-                            </View>
+
+                            <Pressable
+                                onPress={() => navigation.navigate('DisplayNotes_Screen', { catagoryName: 'OfficeNotes' })}>
+                                <View style={styles.imageView}>
+                                    <Image
+                                        style={styles.image}
+                                        source={require('../../../assets/images/officeCatagory.png')}/>
+                                </View>
+                                <View style={styles.catgoriesTitleView}>
+                                    <Text style={[styles.catagoriesTitleText, { borderBottomLeftRadius: 20 }]}>Office</Text>
+                                </View>
+                            </Pressable>
                         </View>
 
                     </View>
 
                     <View style={styles.catagoriesView}>
                         <View style={styles.catagoryThreeView}>
-                        <View style={styles.catgoriesTitleView}>
-                                <Text style={[styles.catagoriesTitleText, {borderTopRightRadius: 20}]}>Work</Text>
-                            </View>
+                            <Pressable
+                                onPress={() => navigation.navigate('DisplayNotes_Screen', { catagoryName: 'WorkNotes' })}>
+                                <View style={styles.catgoriesTitleView}>
+                                    <Text style={[styles.catagoriesTitleText, { borderTopRightRadius: 20 }]}>Work</Text>
+                                </View>
+                                <View style={styles.imageView}>
+                                    <Image
+                                        style={styles.image}
+                                        source={require('../../../assets/images/workCatagory.png')}/>
+                                </View>
+                            </Pressable>
 
-
-                            <View style={styles.imageView}>
-                                <Image
-                                    style={styles.image}
-                                    source={require('../../../assets/images/workCatagory.png')}
-                                />
-                            </View>
 
                         </View>
 
                         <View style={styles.catagoryFourView}>
-                        <View style={styles.catgoriesTitleView}>
-                                <Text style={[styles.catagoriesTitleText, {borderTopLeftRadius: 20}]}>Health</Text>
-                            </View>
-                            <View style={styles.imageView}>
-                                <Image
-                                    style={[styles.image]}
-                                    source={require('../../../assets/images/healthCatagory.png')}
-                                />
-                            </View>
+                            <Pressable
+                                onPress={() => navigation.navigate('DisplayNotes_Screen', { catagoryName: 'HealthNotes' })}>
+                                <View style={styles.catgoriesTitleView}>
+
+                                    <Text style={[styles.catagoriesTitleText, { borderTopLeftRadius: 20 }]}>Health</Text>
+                                </View>
+                                <View style={styles.imageView}>
+                                    <Image
+                                        style={[styles.image]}
+                                        source={require('../../../assets/images/healthCatagory.png')} />
+                                </View>
+                            </Pressable>
 
                         </View>
 
@@ -99,9 +110,9 @@ const HomeScreen = () => {
                 </View>
 
                 <View style={styles.lottieTextView}>
-                    <Pressable 
-                    onPress={onAddNotesPressed}
-                    style={styles.pressable}>
+                    <Pressable
+                        onPress={onAddNotesPressed}
+                        style={styles.pressable}>
                         <AddLottie />
                     </Pressable>
                     <Text style={styles.addNotesText}>Add notes</Text>
@@ -128,7 +139,7 @@ const styles = StyleSheet.create({
     titleCatagoriesView: {
         //flex: 1,
         paddingTop: 30,
-        
+
         justifyContent: 'center'
 
     },

@@ -27,6 +27,7 @@ const AddNotesScreen = () => {
           multiline
           numberOfLines={4}
         />
+        
 
       </View>
 
@@ -51,6 +52,7 @@ const AddNotesScreen = () => {
             <Text style={styles.catagoryPressableText}>Health</Text>
           </Pressable>
         </View>
+        
       </View>
 
       <View style={styles.pressableView}>
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
   },
 
   pressableView: {
-    flex: 0.7,
+    flex: 0.2,
     justifyContent: 'center',
     alignItems: 'center'
   },
