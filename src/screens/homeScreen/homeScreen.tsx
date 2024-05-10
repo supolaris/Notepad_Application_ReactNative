@@ -5,8 +5,6 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import AddLottie from '../../components/lottie/addLottie';
 
-import { CatagoriesData } from '../../../assets/catagoriesData/catagoriesData';
-import CatagoriesCard from '../../components/catagoriesCard/catagoriesCard';
 import { NotepadAppColors } from '../../components/colors/notepadColors';
 
 import { useNavigation } from '@react-navigation/native';
@@ -46,7 +44,7 @@ const HomeScreen = () => {
                                 <View style={styles.imageView}>
                                     <Image
                                         style={[styles.image, { marginBottom: 2 }]}
-                                        source={require('../../../assets/images/houseCatagory.png')}/>
+                                        source={require('../../../assets/images/houseCatagory.png')} />
                                 </View>
                                 <View style={styles.catgoriesTitleView}>
                                     <Text style={[styles.catagoriesTitleText, { borderBottomRightRadius: 20 }]}>Home</Text>
@@ -62,7 +60,7 @@ const HomeScreen = () => {
                                 <View style={styles.imageView}>
                                     <Image
                                         style={styles.image}
-                                        source={require('../../../assets/images/officeCatagory.png')}/>
+                                        source={require('../../../assets/images/officeCatagory.png')} />
                                 </View>
                                 <View style={styles.catgoriesTitleView}>
                                     <Text style={[styles.catagoriesTitleText, { borderBottomLeftRadius: 20 }]}>Office</Text>
@@ -82,7 +80,7 @@ const HomeScreen = () => {
                                 <View style={styles.imageView}>
                                     <Image
                                         style={styles.image}
-                                        source={require('../../../assets/images/workCatagory.png')}/>
+                                        source={require('../../../assets/images/workCatagory.png')} />
                                 </View>
                             </Pressable>
 

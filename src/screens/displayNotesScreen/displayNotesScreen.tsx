@@ -8,17 +8,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRoute } from '@react-navigation/native';
 import { NotepadAppColors } from '../../components/colors/notepadColors';
 
-const DisplayNotesScreen = (props) => {
+const DisplayNotesScreen = (props: any) => {
 
     const { route } = props;
     const { catagoryName } = route.params;
-    const { NotesData } = route.params;
 
     const [notes, setNotes] = useState([]);
 
-
     useEffect(() => {
-        console.log("Catagory Name: " + catagoryName);
         loadNotes();
     }, []);
 
@@ -32,7 +29,7 @@ const DisplayNotesScreen = (props) => {
         }
     };
 
-    const renderItem = ({ item, index }) => (
+    const renderItem = ({ item, index }: {item: any, index: any}) => (
         <View style={styles.itemView}>
 
             <View style={styles.notesItemView}>
@@ -58,7 +55,7 @@ const DisplayNotesScreen = (props) => {
                 data={notes}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
-                contentContainerStyle={styles.noteList}
+                //contentContainerStyle={styles.noteList}
                 ListEmptyComponent={() => (
                     <Text style={styles.emptyListText}>No notes found</Text>
                 )}
@@ -75,6 +72,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+    },
+    emptyListText: {
+        fontSize: 30,
+        color: 'black',
+        textAlign: 'center',
+        paddingTop: 50
     },
 
     itemView: {

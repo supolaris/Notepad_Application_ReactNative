@@ -33,50 +33,63 @@ const AddNotesScreen = () => {
 
   const onSavePressed = async () => {
 
-    if (!notesCatagory) {
-      Alert.alert('Please Select Notes Catagory')
+    if (!note.title) {
+      Alert.alert("Invalid input", "Enter title")
     }
     else {
-      if (notesCatagory === 'Home') {
-        const newNotes = [...notes, note];
-        await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
-        setNotes(newNotes);
-        setNote({ title: '', description: '' })
+      if (!note.description) {
+        Alert.alert("Invalid input", "Enter description")
       }
-      else if (notesCatagory === 'Office') {
-        const newNotes = [...notes, note];
-        await AsyncStorage.setItem('OfficeNotes', JSON.stringify(newNotes));
-        setNotes(newNotes);
-        setNote({ title: '', description: '' })
+      else {
+        if (!notesCatagory) {
+          Alert.alert("Invalid Input", "Select catagory")
+        }
+        else {
+          if (notesCatagory === 'Home') {
+            const newNotes = [...notes, note];
+            await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
+            setNotes(newNotes);
+            setNote({ title: '', description: '' })
+          }
+
+          else if (notesCatagory === 'Office') {
+            const newNotes = [...notes, note];
+            await AsyncStorage.setItem('OfficeNotes', JSON.stringify(newNotes));
+            setNotes(newNotes);
+            setNote({ title: '', description: '' })
+          }
+
+          else if (notesCatagory === 'Work') {
+            const newNotes = [...notes, note];
+            await AsyncStorage.setItem('WorkNotes', JSON.stringify(newNotes));
+            setNotes(newNotes);
+            setNote({ title: '', description: '' })
+          }
+
+          else if (notesCatagory === 'Health') {
+            const newNotes = [...notes, note];
+            await AsyncStorage.setItem('HealthNotes', JSON.stringify(newNotes));
+            setNotes(newNotes);
+            setNote({ title: '', description: '' })
+          }
+          Alert.alert("Success", "Your notes are saved")
+        }
       }
-      else if (notesCatagory === 'Work') {
-        const newNotes = [...notes, note];
-        await AsyncStorage.setItem('WorkNotes', JSON.stringify(newNotes));
-        setNotes(newNotes);
-        setNote({ title: '', description: '' })
-      }
-      else if (notesCatagory === 'Health') {
-        const newNotes = [...notes, note];
-        await AsyncStorage.setItem('HealthNotes', JSON.stringify(newNotes));
-        setNotes(newNotes);
-        setNote({ title: '', description: '' })
-      }
-      Alert.alert("Success", "Your notes are saved")
     }
   };
 
   const onHomeCatagorySelect = () => {
     setNotesCatagory('Home');
-
   }
+
   const onOfficeCatagorySelect = () => {
     setNotesCatagory('Office');
-
   }
+
   const onWorkCatagorySelect = () => {
     setNotesCatagory('Work');
-
   }
+
   const onHealthCatagorySelect = () => {
     setNotesCatagory('Health');
   }
@@ -110,7 +123,6 @@ const AddNotesScreen = () => {
       <View style={styles.selectCatagoryView}>
 
         <Text style={styles.selectCatagoryText}>Select Catagory</Text>
-        
 
         <View style={styles.catagoryViewOne}>
           <Pressable
@@ -135,11 +147,11 @@ const AddNotesScreen = () => {
             onPress={onHealthCatagorySelect}
             style={styles.catagoryPressable}>
             <Text style={styles.catagoryPressableText}>Health</Text>
-
           </Pressable>
         </View>
 
-        <Text style={{ fontSize: 20 }}>Selected Catagory: {notesCatagory}</Text>
+        <Text style={{ fontSize: 25, width: '90%', color: 'black', textAlign: 'center' }}>Selected Catagory</Text>
+        <Text style={{ fontSize: 20, width: '90%', color: 'red', textAlign: 'center' }}>{notesCatagory}</Text>
       </View>
 
       <View style={styles.pressableView}>
@@ -148,6 +160,13 @@ const AddNotesScreen = () => {
           style={styles.pressable}>
           <Text style={styles.pressableText}>Save</Text>
         </Pressable>
+
+        <Pressable
+          onPress={() => navigation.navigate('Home_Screen')}
+          style={{ paddingTop: 20 }}>
+          <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', backgroundColor: NotepadAppColors.lightBlue, paddingHorizontal: 20, borderRadius: 10, paddingVertical: 10 }}>View Notes</Text>
+        </Pressable>
+
       </View>
 
     </View>
@@ -164,7 +183,7 @@ const styles = StyleSheet.create({
   titleView: {
     alignItems: 'center',
     paddingTop: 60,
-    
+
 
   },
   titleText: {
