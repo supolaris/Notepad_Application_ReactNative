@@ -1,35 +1,33 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Pressable, Image, FlatList, Alert } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Pressable, Image, FlatList, Alert, SafeAreaView } from 'react-native';
 
 import { NotepadAppColors } from '../../components/colors/notepadColors';
 
 import { useNavigation } from '@react-navigation/native';
 
-// import { launchImageLibrary } from 'react-native-image-picker';
-// import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
+
 // import FastImage from 'react-native-fast-image';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AddNotesScreen = () => {
+  //const dummyImage = require('../../../assets/images/houseCatagory.png');
 
   const navigation = useNavigation();
 
-  const [note, setNote] = useState({ title: '', description: '' });
+  const [note, setNote] = useState({ title: '', description: '', image: '' });
   const [notes, setNotes] = useState([]);
 
   const [notesCatagory, setNotesCatagory] = useState();
 
-  // const [imageUrl, setImageUrl] = useState();
-
-  // const image = require('../../../assets/images/healthCatagory.png')
-
-  // const onImagePickPressed = async () => {
-  //   console.log('image picker pressed');
-  //   const result = await launchImageLibrary();
-  //   setImageUrl(result?.assets[0]?.uri);
-  //   console.log('result' + result);
-  // };
+  const selectImage = async () => {
+    console.log('image picker pressed');
+    const result = await launchImageLibrary();
+    setNote({ ...note, image: result?.assets[0]?.uri })
+    console.log('result' + result);
+  };
 
   const onSavePressed = async () => {
 
@@ -95,81 +93,101 @@ const AddNotesScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.textInputView}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <View style={styles.textInputView}>
 
-        <View style={styles.titleView}>
-          <Text style={styles.titleText}>Add Notes</Text>
+          <View style={styles.titleView}>
+            <Text style={styles.titleText}>Add Notes</Text>
+          </View>
+
+          <View style={{ alignItems: 'center' }}>
+            <Pressable
+              onPress={selectImage}
+              style={{ alignItems: 'center' }}>
+              <View style={{ borderWidth: 1, padding: 5, borderRadius: 100, borderStyle: 'dotted' }}>
+                <Image
+                  style={{ height: 50, width: 50, borderRadius: 100 }}
+                  source={{ uri: note.image }}
+
+                />
+
+              </View>
+
+              <Text style={{ textAlign: 'center', fontSize: 20 }}>Upload</Text>
+            </Pressable>
+
+          </View>
+
+          <TextInput
+            style={styles.textInput}
+            placeholder='Title'
+            placeholderTextColor={NotepadAppColors.darkGray}
+            value={note.title}
+            onChangeText={(text) => setNote({ ...note, title: text })}
+          />
+          <TextInput
+            style={styles.textInput}
+            placeholder='Description'
+            placeholderTextColor={NotepadAppColors.darkGray}
+            value={note.description}
+            onChangeText={(text) => setNote({ ...note, description: text })}
+            multiline
+            numberOfLines={4}
+          />
         </View>
 
-        <TextInput
-          style={styles.textInput}
-          placeholder='Title'
-          placeholderTextColor={NotepadAppColors.darkGray}
-          value={note.title}
-          onChangeText={(text) => setNote({ ...note, title: text })}
-        />
-        <TextInput
-          style={styles.textInput}
-          placeholder='Description'
-          placeholderTextColor={NotepadAppColors.darkGray}
-          value={note.description}
-          onChangeText={(text) => setNote({ ...note, description: text })}
-          multiline
-          numberOfLines={4}
-        />
-      </View>
+        <View style={styles.selectCatagoryView}>
 
-      <View style={styles.selectCatagoryView}>
+          <Text style={styles.selectCatagoryText}>Select Catagory</Text>
 
-        <Text style={styles.selectCatagoryText}>Select Catagory</Text>
+          <View style={styles.catagoryViewOne}>
+            <Pressable
+              onPress={onHomeCatagorySelect}
+              style={styles.catagoryPressable}>
+              <Text style={styles.catagoryPressableText}>Home</Text>
+            </Pressable>
+            <Pressable
+              onPress={onOfficeCatagorySelect}
+              style={styles.catagoryPressable}>
+              <Text style={styles.catagoryPressableText}>Office</Text>
+            </Pressable>
+          </View>
 
-        <View style={styles.catagoryViewOne}>
-          <Pressable
-            onPress={onHomeCatagorySelect}
-            style={styles.catagoryPressable}>
-            <Text style={styles.catagoryPressableText}>Home</Text>
-          </Pressable>
-          <Pressable
-            onPress={onOfficeCatagorySelect}
-            style={styles.catagoryPressable}>
-            <Text style={styles.catagoryPressableText}>Office</Text>
-          </Pressable>
+          <View style={styles.catagoryViewTwo}>
+            <Pressable
+              onPress={onWorkCatagorySelect}
+              style={styles.catagoryPressable}>
+              <Text style={styles.catagoryPressableText}>Work</Text>
+            </Pressable>
+            <Pressable
+              onPress={onHealthCatagorySelect}
+              style={styles.catagoryPressable}>
+              <Text style={styles.catagoryPressableText}>Health</Text>
+            </Pressable>
+          </View>
+
+          <Text style={{ fontSize: 20, width: '90%', color: 'black', textAlign: 'center', paddingBottom: 10 }}>Selected Catagory: <Text style={{ color: 'red' }}>{notesCatagory}</Text></Text>
+
         </View>
 
-        <View style={styles.catagoryViewTwo}>
+        <View style={styles.pressableView}>
           <Pressable
-            onPress={onWorkCatagorySelect}
-            style={styles.catagoryPressable}>
-            <Text style={styles.catagoryPressableText}>Work</Text>
+            onPress={onSavePressed}
+            style={styles.pressable}>
+            <Text style={styles.pressableText}>Save</Text>
           </Pressable>
+
           <Pressable
-            onPress={onHealthCatagorySelect}
-            style={styles.catagoryPressable}>
-            <Text style={styles.catagoryPressableText}>Health</Text>
+            onPress={() => navigation.navigate('Home_Screen')}
+            style={{ paddingTop: 20 }}>
+            <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', backgroundColor: NotepadAppColors.lightBlue, paddingHorizontal: 20, borderRadius: 10, paddingVertical: 10 }}>View Notes</Text>
           </Pressable>
+
         </View>
 
-        <Text style={{ fontSize: 25, width: '90%', color: 'black', textAlign: 'center' }}>Selected Catagory</Text>
-        <Text style={{ fontSize: 20, width: '90%', color: 'red', textAlign: 'center' }}>{notesCatagory}</Text>
       </View>
-
-      <View style={styles.pressableView}>
-        <Pressable
-          onPress={onSavePressed}
-          style={styles.pressable}>
-          <Text style={styles.pressableText}>Save</Text>
-        </Pressable>
-
-        <Pressable
-          onPress={() => navigation.navigate('Home_Screen')}
-          style={{ paddingTop: 20 }}>
-          <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold', backgroundColor: NotepadAppColors.lightBlue, paddingHorizontal: 20, borderRadius: 10, paddingVertical: 10 }}>View Notes</Text>
-        </Pressable>
-
-      </View>
-
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -182,18 +200,16 @@ const styles = StyleSheet.create({
   },
   titleView: {
     alignItems: 'center',
-    paddingTop: 60,
-
+    paddingTop: 10,
 
   },
   titleText: {
-    fontSize: 35,
+    fontSize: 25,
     fontWeight: 'bold',
     color: NotepadAppColors.black
 
   },
   headingView: {
-    flex: 0.4,
     paddingTop: 20
 
   },
@@ -204,7 +220,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   imageDisplayView: {
-    flex: 1.6,
+    //flex: 1.6,
     justifyContent: 'center',
     alignItems: 'center',
 
@@ -229,7 +245,7 @@ const styles = StyleSheet.create({
   },
   selectCatagoryView: {
     //flex: 1.2,
-    paddingTop: 30,
+    paddingTop: 10,
     marginHorizontal: 10,
     //borderWidth: 1,
     borderRadius: 10,
@@ -266,7 +282,7 @@ const styles = StyleSheet.create({
 
   },
   textInputView: {
-    flex: 1,
+    //flex: 1,
     justifyContent: 'center',
   },
   textInput: {
@@ -281,7 +297,7 @@ const styles = StyleSheet.create({
   },
 
   pressableView: {
-    flex: 0.7,
+    //flex: 0.7,
     justifyContent: 'center',
     alignItems: 'center'
   },

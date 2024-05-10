@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 
 import Header from '../../components/header/header';
 
@@ -29,10 +29,16 @@ const DisplayNotesScreen = (props: any) => {
         }
     };
 
-    const renderItem = ({ item, index }: {item: any, index: any}) => (
+    const renderItem = ({ item, index }: { item: any, index: any }) => (
         <View style={styles.itemView}>
 
             <View style={styles.notesItemView}>
+                <View>
+                    <Image
+                        style={{ height: 50, width: 50, borderRadius: 100 }}
+                        source={{ uri: item.image }}
+                    />
+                </View>
                 <View style={styles.titleView}>
                     <Text style={styles.titleText}>{item.title}</Text>
                 </View>
@@ -40,7 +46,6 @@ const DisplayNotesScreen = (props: any) => {
                 <View style={styles.descriptionView}>
                     <Text style={styles.descriptionText}>{item.description}</Text>
                 </View>
-
 
             </View>
 

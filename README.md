@@ -46,8 +46,10 @@ npm i --save-dev @types/react-native-vector-icons
 npm i react-native-linear-gradient
 ```
 
-```bash
+## Image Picker
 
+```bash
+yarn add react-native-image-picker
 ```
 
 ```bash
