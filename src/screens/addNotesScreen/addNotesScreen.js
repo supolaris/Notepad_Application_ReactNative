@@ -1,33 +1,81 @@
-import React from 'react';
-import { View, Text, StyleSheet, TextInput, Pressable, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, Pressable, Image, FlatList } from 'react-native';
 
 import { NotepadAppColors } from '../../components/colors/notepadColors';
 
+import { launchImageLibrary } from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-picker';
+
+import FastImage from 'react-native-fast-image';
+
 const AddNotesScreen = () => {
+
+  const [imageUrl, setImageUrl] = useState();
+  const [enteredNotesText, setEnteredNotesText] = useState('');
+  const [notes, setNotes] = useState([]);
+
+  const image = require('../../../assets/images/healthCatagory.png')
+
+  const onImagePickPressed = async () => {
+    console.log('image picker pressed');
+    const result = await launchImageLibrary();
+    setImageUrl(result?.assets[0]?.uri);
+    console.log('result' + result);
+  };
+
+  function enterNotesInputHandler(enteredText) {
+    setEnteredNotesText(enteredText);
+  }
+
+  function addEnteredNotes() {
+    setNotes((currentCourseGoals) => [
+      ...currentCourseGoals,
+      { text: enteredNotesText, id: Math.random().toString() },
+    ])
+
+    // modalCloseHandler()
+  }
+
   return (
     <View style={styles.container}>
-
-      <View style={styles.imageDisplayView}>
-        <View style={styles.imageView}>
-          <Image
-            style={styles.imageDisplay}
-            source={require('../../../assets/images/houseCatagory.png')}
-          />
-        </View>
-        <Text style={styles.uploadImageText}>
-          Upload image
-        </Text>
-      </View>
-
       <View style={styles.textInputView}>
         <TextInput
           style={styles.textInput}
           placeholder='Write your notes'
           placeholderTextColor={NotepadAppColors.darkGray}
+          onChangeText={enterNotesInputHandler}
           multiline
           numberOfLines={4}
         />
+      </View>
 
+      <View>
+        <FlatList
+          data={notes}
+
+          renderItem={(itemData) => {
+            itemData.index
+            return (
+              <View>
+                <Pressable
+                  //style={({ pressed }) => pressed && HomeStyles.pressedItem}
+                  android_ripple={{ color: 'red' }}
+                //onPress={deleteGoalHandler.bind(this, itemData.item.id)}
+                >
+                  <Text
+                  // style={HomeStyles.goalText}
+                  >
+                    {itemData.item.text}</Text>
+                </Pressable>
+              </View>
+            )
+          }}
+          keyExtractor={(item, index) => {
+            return item.id;
+          }}
+
+
+        />
       </View>
 
       <View style={styles.selectCatagoryView}>
@@ -54,7 +102,9 @@ const AddNotesScreen = () => {
       </View>
 
       <View style={styles.pressableView}>
-        <Pressable style={styles.pressable}>
+        <Pressable
+          onPress={addEnteredNotes}
+          style={styles.pressable}>
           <Text style={styles.pressableText}>Save</Text>
         </Pressable>
       </View>
@@ -97,6 +147,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     borderWidth: 1,
+    borderRadius: 10
 
   },
   uploadImageText: {

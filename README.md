@@ -46,16 +46,22 @@ npm i --save-dev @types/react-native-vector-icons
 npm i react-native-linear-gradient
 ```
 
-```bash
+## Async Storage
 
+```bash
+yarn add @react-native-async-storage/async-storage
 ```
 
-```bash
+## Cache Image
 
+```bash
+yarn add react-native-fast-image
 ```
 
-```bash
+## Image picker
 
+```bash
+yarn add react-native-image-picker
 ```
 
 ```bash

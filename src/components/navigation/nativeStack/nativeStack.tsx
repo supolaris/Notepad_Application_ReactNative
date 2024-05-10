@@ -4,22 +4,27 @@ import { NavigationContainer } from '@react-navigation/native';
 import StartupScreen from '../../../screens/startupScreen/startupScreen';
 import HomeScreen from '../../../screens/homeScreen/homeScreen';
 import AddNotesScreen from '../../../screens/addNotesScreen/addNotesScreen';
+import DisplayNotesScreen from '../../../screens/displayNotesScreen/displayNotesScreen';
 
 const Stack = createNativeStackNavigator();
 
 function MyNativeStack() {
   return (
     <NavigationContainer>
-
       <Stack.Navigator
         screenOptions={{
           headerShown: false
         }}
       >
 
-<Stack.Screen
+        <Stack.Screen
           name="AddNotes_Screen"
           component={AddNotesScreen}
+        />
+
+        <Stack.Screen
+          name="DisplayNotes_Screen"
+          component={DisplayNotesScreen}
         />
 
         <Stack.Screen
@@ -31,10 +36,6 @@ function MyNativeStack() {
           name="Startup_Screen"
           component={StartupScreen}
         />
-
-
-
-
 
       </Stack.Navigator>
 
