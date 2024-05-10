@@ -76,7 +76,7 @@ export default DisplayNotesScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ffffff',
     },
     emptyListText: {
         fontSize: 30,

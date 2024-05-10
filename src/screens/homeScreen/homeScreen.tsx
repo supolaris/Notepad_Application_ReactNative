@@ -9,7 +9,6 @@ import { NotepadAppColors } from '../../components/colors/notepadColors';
 
 import { useNavigation } from '@react-navigation/native';
 
-
 const HomeScreen = () => {
 
     const navigation = useNavigation();
@@ -127,75 +126,58 @@ export default HomeScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //paddingHorizontal: 10
-
     },
     linearGradient: {
         flex: 1
-
     },
     titleCatagoriesView: {
-        //flex: 1,
         paddingTop: 30,
-
         justifyContent: 'center'
-
     },
     titleView: {
         alignItems: 'center',
         paddingBottom: 20,
-
     },
     titleText: {
         fontSize: 30,
         fontWeight: 'bold',
         color: NotepadAppColors.black
-
     },
     catagoriesView: {
         paddingHorizontal: 15,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         marginVertical: 10
-
     },
     catagoryOneView: {
         marginHorizontal: 30,
         borderWidth: 0.9,
         borderBottomRightRadius: 20
-
-
     },
     catagoryTwoView: {
         marginHorizontal: 30,
         borderWidth: 0.9,
         borderBottomLeftRadius: 20,
-
     },
     catagoryThreeView: {
         marginHorizontal: 30,
         borderWidth: 0.9,
         borderTopRightRadius: 20
-
     },
     catagoryFourView: {
         marginHorizontal: 30,
         borderWidth: 0.9,
         borderTopLeftRadius: 20
-
     },
     imageView: {
         paddingHorizontal: 10,
         paddingTop: 20
-
     },
     image: {
         height: 150,
         width: 150
-
     },
     catgoriesTitleView: {
-
 
     },
     catagoriesTitleText: {
@@ -203,9 +185,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: NotepadAppColors.white,
         backgroundColor: NotepadAppColors.lightBlue,
-        //borderBottomRightRadius: 15,
         textAlign: 'center'
-
     },
 
     lottieTextView: {
@@ -213,17 +193,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingBottom: 10
-
     },
     pressable: {
-
-
 
     },
     addNotesText: {
         fontSize: 30,
         color: NotepadAppColors.white
-
-    }
+    },
 
 })

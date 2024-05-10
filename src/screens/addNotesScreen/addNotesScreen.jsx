@@ -109,14 +109,11 @@ const AddNotesScreen = () => {
                 <Image
                   style={{ height: 50, width: 50, borderRadius: 100 }}
                   source={{ uri: note.image }}
-
                 />
-
               </View>
 
               <Text style={{ textAlign: 'center', fontSize: 20 }}>Upload</Text>
             </Pressable>
-
           </View>
 
           <TextInput
@@ -196,22 +193,18 @@ export default AddNotesScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
   },
   titleView: {
     alignItems: 'center',
     paddingTop: 10,
-
   },
   titleText: {
     fontSize: 25,
     fontWeight: 'bold',
     color: NotepadAppColors.black
-
   },
   headingView: {
     paddingTop: 20
-
   },
   headingText: {
     color: NotepadAppColors.black,
@@ -220,23 +213,19 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   imageDisplayView: {
-    //flex: 1.6,
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   imageView: {
     padding: 30,
     borderRadius: 100,
     borderWidth: 1
-
   },
   imageDisplay: {
     height: 100,
     width: 100,
     borderWidth: 1,
     borderRadius: 10
-
   },
   uploadImageText: {
     fontSize: 18,
@@ -244,10 +233,8 @@ const styles = StyleSheet.create({
 
   },
   selectCatagoryView: {
-    //flex: 1.2,
     paddingTop: 10,
     marginHorizontal: 10,
-    //borderWidth: 1,
     borderRadius: 10,
     borderStyle: 'dashed',
     borderColor: NotepadAppColors.black,
@@ -258,7 +245,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: NotepadAppColors.black,
     fontWeight: 'bold'
-
   },
   catagoryViewOne: {
     flexDirection: 'row',
@@ -268,21 +254,18 @@ const styles = StyleSheet.create({
     backgroundColor: NotepadAppColors.lightBlue,
     margin: 10,
     borderRadius: 10
-
   },
   catagoryPressableText: {
     fontSize: 20,
     color: NotepadAppColors.white,
     padding: 15,
     textAlign: 'center'
-
   },
   catagoryViewTwo: {
     flexDirection: 'row',
 
   },
   textInputView: {
-    //flex: 1,
     justifyContent: 'center',
   },
   textInput: {
@@ -293,11 +276,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     fontSize: 20,
     color: NotepadAppColors.black
-
   },
-
   pressableView: {
-    //flex: 0.7,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -306,7 +286,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 10,
     width: '80%',
-
   },
   pressableText: {
     fontSize: 25,
@@ -314,5 +293,4 @@ const styles = StyleSheet.create({
     color: NotepadAppColors.white,
     textAlign: 'center'
   },
-
 })
