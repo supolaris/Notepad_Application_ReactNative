@@ -18,9 +18,11 @@ const AddNotesScreen = () => {
   const navigation = useNavigation();
 
   const [note, setNote] = useState({ title: '', description: '', image: '' });
-  const [notes, setNotes] = useState([]);
 
+  const [homeNotes, setHomeNotes] = useState([]);
   const [OfficeNotes, setOfficeNotes] = useState([]);
+  const [workNotes, setWorkNotes] = useState([]);
+  const [healthNotes, setHealthNotes] = useState([]);
 
   const [notesCatagory, setNotesCatagory] = useState();
 
@@ -46,33 +48,49 @@ const AddNotesScreen = () => {
         }
         else {
           if (notesCatagory === 'Home') {
-            const newNotes = [...notes, note];
+            const newNotes = [...homeNotes, note];
             await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
-            setNotes(newNotes);
+            setHomeNotes(newNotes);
+
+            let WorkNotesCount = newNotes.length;
+            await AsyncStorage.setItem("HomeNotesCount", WorkNotesCount.toString());
+
             setNote({ title: '', description: '' })
           }
 
           else if (notesCatagory === 'Office') {
-            const newNotes = [...notes, note];
+            const newNotes = [...OfficeNotes, note];
             await AsyncStorage.setItem('OfficeNotes', JSON.stringify(newNotes));
-            setNotes(newNotes);
+            setOfficeNotes(newNotes);
+
+            let WorkNotesCount = newNotes.length;
+            await AsyncStorage.setItem("OfficeNotesCount", WorkNotesCount.toString());
+
             setNote({ title: '', description: '' })
           }
 
           else if (notesCatagory === 'Work') {
-            const newNotes = [...notes, note];
+            const newNotes = [...workNotes, note];
             await AsyncStorage.setItem('WorkNotes', JSON.stringify(newNotes));
-            setNotes(newNotes);
+            setWorkNotes(newNotes);
+
+            let WorkNotesCount = newNotes.length;
+            await AsyncStorage.setItem("WorkNotesCount", WorkNotesCount.toString());
+
             setNote({ title: '', description: '' })
           }
 
           else if (notesCatagory === 'Health') {
-            const newNotes = [...notes, note];
+            const newNotes = [...healthNotes, note];
             await AsyncStorage.setItem('HealthNotes', JSON.stringify(newNotes));
-            setNotes(newNotes);
+            setHealthNotes(newNotes);
+
+            let WorkNotesCount = newNotes.length;
+            await AsyncStorage.setItem("HealthNotesCount", WorkNotesCount.toString());
+
             setNote({ title: '', description: '' })
           }
-          Alert.alert("Success", "Your notes are saved")
+          Alert.alert("Success", "Your notes are saved");
         }
       }
     }
@@ -232,7 +250,6 @@ const styles = StyleSheet.create({
   uploadImageText: {
     fontSize: 18,
     color: NotepadAppColors.black
-
   },
   selectCatagoryView: {
     paddingTop: 10,
@@ -265,7 +282,6 @@ const styles = StyleSheet.create({
   },
   catagoryViewTwo: {
     flexDirection: 'row',
-
   },
   textInputView: {
     justifyContent: 'center',

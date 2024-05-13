@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Pressable, TouchableOpacity } from 'react-native';
 
 import Header from '../../components/header/header';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { useRoute } from '@react-navigation/native';
+import { useFocusEffect, useRoute } from '@react-navigation/native';
+
 import { NotepadAppColors } from '../../components/colors/notepadColors';
 
 const DisplayNotesScreen = (props: any) => {
@@ -15,30 +16,31 @@ const DisplayNotesScreen = (props: any) => {
 
     const [notes, setNotes] = useState([]);
 
-    useEffect(() => {
+    useFocusEffect(useCallback(() => {
         loadNotes();
-    }, []);
+    },[]));
 
     const loadNotes = async () => {
         const storedNotes = await AsyncStorage.getItem(catagoryName);
-        setNotes(storedNotes);
-        console.log("Before parse: " + storedNotes)
+        //setNotes(storedNotes);
         if (storedNotes) {
             setNotes(JSON.parse(storedNotes));
-            console.log("After parse: " + notes)
         }
     };
 
     const renderItem = ({ item, index }: { item: any, index: any }) => (
+
         <View style={styles.itemView}>
 
             <View style={styles.notesItemView}>
+
                 <View>
                     <Image
                         style={{ height: 50, width: 50, borderRadius: 100 }}
                         source={{ uri: item.image }}
                     />
                 </View>
+
                 <View style={styles.titleView}>
                     <Text style={styles.titleText}>{item.title}</Text>
                 </View>
@@ -60,7 +62,6 @@ const DisplayNotesScreen = (props: any) => {
                 data={notes}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
-                //contentContainerStyle={styles.noteList}
                 ListEmptyComponent={() => (
                     <Text style={styles.emptyListText}>No notes found</Text>
                 )}
@@ -70,8 +71,6 @@ const DisplayNotesScreen = (props: any) => {
 }
 
 export default DisplayNotesScreen;
-
-
 
 const styles = StyleSheet.create({
     container: {
@@ -94,7 +93,6 @@ const styles = StyleSheet.create({
 
     },
     notesItemView: {
-        // backgroundColor: 'red',
         marginVertical: 10
 
     },
