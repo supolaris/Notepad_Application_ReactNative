@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, Pressable, TouchableOpacity } from 'react-native';
 
 import Header from '../../components/header/header';
 

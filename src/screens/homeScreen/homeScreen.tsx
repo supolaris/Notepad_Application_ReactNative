@@ -9,9 +9,27 @@ import { NotepadAppColors } from '../../components/colors/notepadColors';
 
 import { useNavigation } from '@react-navigation/native';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const HomeScreen = () => {
 
     const navigation = useNavigation();
+
+    
+    useEffect(() => {
+
+        const fetchNumberOfNotes = async () => {
+            
+            const homeNotes = await AsyncStorage.getItem('HomeNotes');
+            console.log("Home Notes Length: " + homeNotes?.length);
+        }
+
+        fetchNumberOfNotes();
+
+    }, [])
+
+
+
 
     const onAddNotesPressed = () => {
         navigation.navigate("AddNotes_Screen");

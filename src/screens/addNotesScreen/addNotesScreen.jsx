@@ -20,6 +20,8 @@ const AddNotesScreen = () => {
   const [note, setNote] = useState({ title: '', description: '', image: '' });
   const [notes, setNotes] = useState([]);
 
+  const [OfficeNotes, setOfficeNotes] = useState([]);
+
   const [notesCatagory, setNotesCatagory] = useState();
 
   const selectImage = async () => {

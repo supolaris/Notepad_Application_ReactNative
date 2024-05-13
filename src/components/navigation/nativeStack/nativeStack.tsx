@@ -18,20 +18,22 @@ function MyNativeStack() {
           headerShown: false
         }}
       >
+                <Stack.Screen
+          name="AddNotes_Screen"
+          component={AddNotesScreen}
+        />
+                <Stack.Screen
+          name="DisplayNotes_Screen"
+          component={DisplayNotesScreen}
+        />
 
         <Stack.Screen
           name="Home_Screen"
           component={HomeScreen}
         />
 
-        <Stack.Screen
-          name="DisplayNotes_Screen"
-          component={DisplayNotesScreen}
-        />
-        <Stack.Screen
-          name="AddNotes_Screen"
-          component={AddNotesScreen}
-        />
+
+
 
         {/* <Stack.Screen
           name="Notes"
