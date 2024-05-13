@@ -22,33 +22,27 @@ const HomeScreen = () => {
     const [workCount, setWorkCount] = useState('');
     const [healthCount, setHealthCount] = useState('');
 
-    useFocusEffect(() => {
-        console.log("home screen called");
+    useFocusEffect(
+        useCallback(() => {
 
-    })
+            const getNotesCount = async () => {
+                const HomeNotesCount = await AsyncStorage.getItem("HomeNotesCount");
+                setHomeCount(HomeNotesCount);
+    
+                const OfficeNotesCount = await AsyncStorage.getItem("OfficeNotesCount");
+                setOfficeCount(OfficeNotesCount);
+    
+                const WorkNotesCount = await AsyncStorage.getItem("WorkNotesCount");
+                setWorkCount(WorkNotesCount);
+    
+                const HealthNotesCount = await AsyncStorage.getItem("HealthNotesCount");
+                setHealthCount(HealthNotesCount);
+            }
 
-    useFocusEffect(() => {
+            getNotesCount();
 
-
-        const getNotesCount = async () => {
-            const HomeNotesCount = await AsyncStorage.getItem("HomeNotesCount");
-            setHomeCount(HomeNotesCount);
-
-            console.log("Home: " + HomeNotesCount);
-
-            const OfficeNotesCount = await AsyncStorage.getItem("OfficeNotesCount");
-            setOfficeCount(OfficeNotesCount);
-
-            const WorkNotesCount = await AsyncStorage.getItem("WorkNotesCount");
-            setWorkCount(WorkNotesCount);
-
-            const HealthNotesCount = await AsyncStorage.getItem("HealthNotesCount");
-            setHealthCount(HealthNotesCount);
-        }
-
-        getNotesCount();
-
-    })
+        }, [])
+    )
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
