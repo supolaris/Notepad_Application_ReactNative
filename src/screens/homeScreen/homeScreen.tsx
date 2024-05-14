@@ -11,6 +11,8 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import HomeScreenUi from '../../components/ui/HomeScreenUi';
+
 const HomeScreen = () => {
 
     const navigation = useNavigation();

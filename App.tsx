@@ -1,4 +1,4 @@
-import MyNativeStack from "./src/components/navigation/nativeStack/nativeStack";
+import MyNativeStack from "./src/routes/navigation/nativeStack/nativeStack";
 
 const App = () =>{
   return(
