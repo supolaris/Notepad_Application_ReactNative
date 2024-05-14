@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { RefreshControl, View, Text, StyleSheet, ScrollView, Pressable, Image } from 'react-native';
+import { RefreshControl, View, Text, StyleSheet, ScrollView, Pressable, Image, StatusBar } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -26,16 +26,16 @@ const HomeScreen = () => {
         useCallback(() => {
 
             const getNotesCount = async () => {
-                const HomeNotesCount = await AsyncStorage.getItem("HomeNotesCount");
+                const HomeNotesCount: any = await AsyncStorage.getItem("HomeNotesCount");
                 setHomeCount(HomeNotesCount);
     
-                const OfficeNotesCount = await AsyncStorage.getItem("OfficeNotesCount");
+                const OfficeNotesCount: any = await AsyncStorage.getItem("OfficeNotesCount");
                 setOfficeCount(OfficeNotesCount);
     
-                const WorkNotesCount = await AsyncStorage.getItem("WorkNotesCount");
+                const WorkNotesCount: any = await AsyncStorage.getItem("WorkNotesCount");
                 setWorkCount(WorkNotesCount);
     
-                const HealthNotesCount = await AsyncStorage.getItem("HealthNotesCount");
+                const HealthNotesCount: any = await AsyncStorage.getItem("HealthNotesCount");
                 setHealthCount(HealthNotesCount);
             }
 
@@ -57,6 +57,7 @@ const HomeScreen = () => {
 
     return (
         <View style={styles.container}>
+            <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
             <ScrollView
                 contentContainerStyle={{ flex: 1 }}
                 refreshControl={
@@ -68,15 +69,6 @@ const HomeScreen = () => {
                         <View style={styles.titleView}>
                             <Text style={styles.titleText}>Notes Catagories</Text>
                         </View>
-
-                        {/* <View style={styles.catagoriesFlatListView}>
-                    <FlatList
-                        // horizonta/l
-                        numColumns={2}
-                        data={CatagoriesData}
-                        renderItem={(({ item }) => <CatagoriesCard item={item} />)}
-                    />
-                </View> */}
 
                         <View style={styles.catagoriesView}>
                             <View style={styles.catagoryOneView}>

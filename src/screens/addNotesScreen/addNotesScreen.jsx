@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Pressable, Image, FlatList, Alert, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Pressable, Image, StatusBar, Alert, SafeAreaView } from 'react-native';
 
 import { NotepadAppColors } from '../../components/colors/notepadColors';
 
@@ -11,6 +11,11 @@ import { launchImageLibrary } from 'react-native-image-picker';
 // import FastImage from 'react-native-fast-image';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['ReactImageView: Image source \"\" doesn\'t exist']);
+LogBox.ignoreLogs(['source.uri should not be an empty string']);
 
 const AddNotesScreen = () => {
   //const dummyImage = require('../../../assets/images/houseCatagory.png');
@@ -26,33 +31,31 @@ const AddNotesScreen = () => {
 
   const [notesCatagory, setNotesCatagory] = useState();
 
-  useEffect(() => {
+  //useEffect(() => {
 
-    // AsyncStorage.removeItem("HomeNotesCount");
-    // AsyncStorage.removeItem("OfficeNotesCount");
-    // AsyncStorage.removeItem("HealthNotesCount");
-    // AsyncStorage.removeItem("WorkNotesCount");
+  // AsyncStorage.removeItem("HomeNotesCount");
+  // AsyncStorage.removeItem("OfficeNotesCount");
+  // AsyncStorage.removeItem("HealthNotesCount");
+  // AsyncStorage.removeItem("WorkNotesCount");
 
-    // AsyncStorage.removeItem("HomeNotes");
-    // AsyncStorage.removeItem("OfficeNotes");
-    // AsyncStorage.removeItem("HealthNotes");
-    // AsyncStorage.removeItem("WorkNotes");
+  // AsyncStorage.removeItem("HomeNotes");
+  // AsyncStorage.removeItem("OfficeNotes");
+  // AsyncStorage.removeItem("HealthNotes");
+  // AsyncStorage.removeItem("WorkNotes");
 
 
-    const getData = async () => {
-      const homeData = await AsyncStorage.getItem("OfficeNotes");
-      console.log("Office Data: " + homeData);
-    }
+  //   const getData = async () => {
+  //     const homeData = await AsyncStorage.getItem("OfficeNotes");
+  //     console.log("Office Data: " + homeData);
+  //   }
 
-    getData();
+  //   getData();
 
-  }, [])
+  // }, [])
 
   const selectImage = async () => {
-    //console.log('image picker pressed');
     const result = await launchImageLibrary();
     setNote({ ...note, image: result?.assets[0]?.uri })
-    //console.log('result' + result);
   };
 
   const onSavePressed = async () => {
@@ -72,29 +75,24 @@ const AddNotesScreen = () => {
           if (notesCatagory === 'Home') {
             try {
               const previousHomeNotes = await AsyncStorage.getItem("HomeNotes");
-
+              let HomeNotesCount
               let previousArrayValue = []
               if (previousHomeNotes !== null && previousHomeNotes !== '') {
                 setHomeNotes(JSON.parse(previousHomeNotes));
                 previousArrayValue = JSON.parse(previousHomeNotes)
                 const newNotes = [...previousArrayValue, note];
                 await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
-                let HomeNotesCount = newNotes.length;
+                HomeNotesCount = newNotes.length;
                 await AsyncStorage.setItem("HomeNotesCount", HomeNotesCount.toString());
               } else {
 
                 setHomeNotes([]);
                 const newNotes = [...homeNotes, note];
                 await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
-                let HomeNotesCount = newNotes.length;
+                HomeNotesCount = newNotes.length;
                 await AsyncStorage.setItem("HomeNotesCount", HomeNotesCount.toString());
               }
-
-              // const newNotes = [...homeNotes, note];
-              // let HomeNotesCount = newNotes.length;
-              // await AsyncStorage.setItem("HomeNotesCount", HomeNotesCount.toString());
               setNote({ title: '', description: '' });
-
 
             } catch (error) {
               console.error("Error:", error);
@@ -106,13 +104,14 @@ const AddNotesScreen = () => {
             try {
               let previousOfficeNotes = await AsyncStorage.getItem('OfficeNotes');
               let previousArrayValue = [];
-              
+              let OfficeNotesCount
+
               if (previousOfficeNotes !== null && previousOfficeNotes !== '') {
                 setOfficeNotes(JSON.parse(previousOfficeNotes))
                 previousArrayValue = JSON.parse(previousOfficeNotes);
                 const newNotes = [...previousArrayValue, note]
                 await AsyncStorage.setItem('OfficeNotes', JSON.stringify(newNotes));
-                let OfficeNotesCount = newNotes.length;
+                OfficeNotesCount = newNotes.length;
                 await AsyncStorage.setItem("OfficeNotesCount", OfficeNotesCount.toString());
 
               }
@@ -120,7 +119,7 @@ const AddNotesScreen = () => {
                 setOfficeNotes([]);
                 const newNotes = [...OfficeNotes, note]
                 await AsyncStorage.setItem('OfficeNotes', JSON.stringify(newNotes));
-                let OfficeNotesCount = newNotes.length;
+                OfficeNotesCount = newNotes.length;
                 await AsyncStorage.setItem("OfficeNotesCount", OfficeNotesCount.toString());
               }
 
@@ -135,24 +134,22 @@ const AddNotesScreen = () => {
             try {
               let previousWorkNotes = await AsyncStorage.getItem('WorkNotes');
               let previousArrayValue = [];
+              let WorkNotesCount
               if (previousWorkNotes !== null && previousWorkNotes !== '') {
                 setWorkNotes(JSON.parse(previousWorkNotes));
                 previousArrayValue = JSON.parse(previousWorkNotes);
                 const newNotes = [...previousArrayValue, note];
                 await AsyncStorage.setItem('WorkNotes', JSON.stringify(newNotes));
-                let WorkNotesCount = newNotes.length;
+                WorkNotesCount = newNotes.length;
                 await AsyncStorage.setItem("WorkNotesCount", WorkNotesCount.toString());
               }
               else {
                 setWorkNotes([]);
                 const newNotes = [...workNotes, note]
                 await AsyncStorage.setItem('WorkNotes', JSON.stringify(newNotes));
-                let WorkNotesCount = newNotes.length;
+                WorkNotesCount = newNotes.length;
                 await AsyncStorage.setItem("WorkNotesCount", WorkNotesCount.toString());
               }
-
-              // const newNotes = [...workNotes, note];
-
               setNote({ title: '', description: '' });
 
             } catch (error) {
@@ -166,19 +163,20 @@ const AddNotesScreen = () => {
             try {
               let previousHealthNotes = await AsyncStorage.getItem('HealthNotes');
               let previousArrayValue = [];
+              let HealthNotesCount
               if (previousHealthNotes !== null && previousHealthNotes !== '') {
                 setWorkNotes(JSON.parse(previousHealthNotes));
                 previousArrayValue = JSON.parse(previousHealthNotes);
                 const newNotes = [...previousArrayValue, note];
                 await AsyncStorage.setItem('HealthNotes', JSON.stringify(newNotes));
-                let HealthNotesCount = newNotes.length;
+                HealthNotesCount = newNotes.length;
                 await AsyncStorage.setItem("HealthNotesCount", HealthNotesCount.toString());
               }
               else {
                 setHealthNotes([]);
                 const newNotes = [...healthNotes, note]
                 await AsyncStorage.setItem('HealthNotes', JSON.stringify(newNotes));
-                let HealthNotesCount = newNotes.length;
+                HealthNotesCount = newNotes.length;
                 await AsyncStorage.setItem("HealthNotesCount", HealthNotesCount.toString());
               }
               setNote({ title: '', description: '' });
@@ -211,6 +209,7 @@ const AddNotesScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
       <View style={styles.container}>
         <View style={styles.textInputView}>
 
@@ -313,7 +312,7 @@ const styles = StyleSheet.create({
   },
   titleView: {
     alignItems: 'center',
-    paddingTop: 10,
+    paddingTop: 30,
   },
   titleText: {
     fontSize: 25,

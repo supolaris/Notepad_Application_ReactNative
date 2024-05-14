@@ -9,6 +9,10 @@ import { useFocusEffect, useRoute } from '@react-navigation/native';
 
 import { NotepadAppColors } from '../../components/colors/notepadColors';
 
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['ReactImageView: Image source \'\' doesn\'t exist']);
+
 const DisplayNotesScreen = (props: any) => {
 
     const { route } = props;

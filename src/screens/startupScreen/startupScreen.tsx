@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, StatusBar } from 'react-native';
 import { NotepadAppColors } from '../../components/colors/notepadColors';
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -11,10 +11,6 @@ import { useNavigation } from '@react-navigation/native';
 
 const StartupScreen = () => {
 
-
-
-
-
     const navigation = useNavigation();
 
     const onGetStartedPressed = () => {
@@ -23,6 +19,7 @@ const StartupScreen = () => {
 
     return (
         <View style={styles.container}>
+            <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
             <LinearGradient colors={['#ffffff', '#ffffff', '#ffffff', '#ececec', '#ececec']} style={styles.linearGradient}>
 
                 <View style={styles.lottieView}>
