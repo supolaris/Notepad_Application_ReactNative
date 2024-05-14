@@ -53,17 +53,17 @@ const HomeScreen = () => {
 
     // Office Catagory pressed
     const onOfficeCatagoryPressed = () => {
-        navigation.navigate('DisplayNotes_Screen', { catagoryName: 'HomeNotes' })
+        navigation.navigate('DisplayNotes_Screen', { catagoryName: 'OfficeNotes' })
     }
 
     // Office Catagory pressed
     const onWorkCatagoryPressed = () => {
-        navigation.navigate('DisplayNotes_Screen', { catagoryName: 'HomeNotes' })
+        navigation.navigate('DisplayNotes_Screen', { catagoryName: 'WorkNotes' })
     }
 
     // Office Catagory pressed
     const onHealthCatagoryPressed = () => {
-        navigation.navigate('DisplayNotes_Screen', { catagoryName: 'HomeNotes' })
+        navigation.navigate('DisplayNotes_Screen', { catagoryName: 'HealthNotes' })
     }
 
     // Add notes button pressed
