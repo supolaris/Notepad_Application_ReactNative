@@ -7,9 +7,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useFocusEffect, useRoute } from '@react-navigation/native';
 
-import { NotepadAppColors } from '../../components/colors/notepadColors';
-
 import { LogBox } from 'react-native';
+
+import DisplayNotesScreenUi from '../../components/ui/DisplayNotesScreenUi';
 
 LogBox.ignoreLogs(['ReactImageView: Image source \'\' doesn\'t exist']);
 
@@ -33,29 +33,12 @@ const DisplayNotesScreen = (props: any) => {
     };
 
     const renderItem = ({ item, index }: { item: any, index: any }) => (
-
-        <View style={styles.itemView}>
-
-            <View style={styles.notesItemView}>
-
-                <View>
-                    <Image
-                        style={{ height: 50, width: 50, borderRadius: 100 }}
-                        source={{ uri: item.image }}
-                    />
-                </View>
-
-                <View style={styles.titleView}>
-                    <Text style={styles.titleText}>{item.title}</Text>
-                </View>
-
-                <View style={styles.descriptionView}>
-                    <Text style={styles.descriptionText}>{item.description}</Text>
-                </View>
-
-            </View>
-
-        </View>
+        
+        <DisplayNotesScreenUi 
+        imageSource={{ uri: item.image }}
+        title={item.title}
+        description={item.description}
+        />
 
     );
 
@@ -86,37 +69,5 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'center',
         paddingTop: 50
-    },
-
-    itemView: {
-        backgroundColor: NotepadAppColors.darkGray,
-        marginVertical: 10,
-        marginHorizontal: 5,
-        borderRadius: 10,
-        paddingLeft: 20
-
-    },
-    notesItemView: {
-        marginVertical: 10
-
-    },
-    titleView: {
-        borderBottomWidth: 0.5,
-        borderColor: NotepadAppColors.white
-
-    },
-    titleText: {
-        fontSize: 30,
-        color: NotepadAppColors.white,
-
-    },
-    descriptionView: {
-
-    },
-    descriptionText: {
-        fontSize: 20,
-        color: NotepadAppColors.white,
-
     }
-
 });
