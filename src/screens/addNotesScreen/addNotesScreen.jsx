@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Pressable, Image, FlatList, Alert, SafeAreaView } from 'react-native';
 
 import { NotepadAppColors } from '../../components/colors/notepadColors';
@@ -26,11 +26,22 @@ const AddNotesScreen = () => {
 
   const [notesCatagory, setNotesCatagory] = useState();
 
+  useEffect(() => {
+
+    const getData = async () => {
+      const homeData = await AsyncStorage.getItem("HomeNotes");
+      console.log("Home Data: " + homeData);
+    }
+
+    getData();
+
+  }, [])
+
   const selectImage = async () => {
-    console.log('image picker pressed');
+    //console.log('image picker pressed');
     const result = await launchImageLibrary();
     setNote({ ...note, image: result?.assets[0]?.uri })
-    console.log('result' + result);
+    //console.log('result' + result);
   };
 
   const onSavePressed = async () => {
@@ -48,14 +59,36 @@ const AddNotesScreen = () => {
         }
         else {
           if (notesCatagory === 'Home') {
-            const newNotes = [...homeNotes, note];
-            await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
-            setHomeNotes(newNotes);
+            try {
+              const previousHomeNotes = await AsyncStorage.getItem("HomeNotes");
 
-            let WorkNotesCount = newNotes.length;
-            await AsyncStorage.setItem("HomeNotesCount", WorkNotesCount.toString());
+              //console.log("Previous note", previousHomeNotes);
+             let previousArrayValue = [] 
+              if (previousHomeNotes !== null && previousHomeNotes !== '') {
+                //console.log('Condition passed');
+                setHomeNotes(JSON.parse(previousHomeNotes));
+                previousArrayValue = JSON.parse(previousHomeNotes)
+                const newNotes = [...previousArrayValue, note];
 
-            setNote({ title: '', description: '' })
+                //console.log('new notes'+ JSON.stringify(newNotes));
+
+                await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
+
+              } else {
+                //console.log("Else entered");
+                setHomeNotes([]);
+                const newNotes = [...homeNotes, note];
+                await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
+              }
+
+              const newNotes = [...homeNotes, note];
+              let HomeNotesCount = newNotes.length;
+              await AsyncStorage.setItem("HomeNotesCount", HomeNotesCount.toString());
+
+              setNote({ title: '', description: '' });
+            } catch (error) {
+              console.error("Error:", error);
+            }
           }
 
           else if (notesCatagory === 'Office') {
