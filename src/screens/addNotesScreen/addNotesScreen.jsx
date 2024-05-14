@@ -73,23 +73,29 @@ const AddNotesScreen = () => {
             try {
               const previousHomeNotes = await AsyncStorage.getItem("HomeNotes");
 
-             let previousArrayValue = [] 
+              let previousArrayValue = []
               if (previousHomeNotes !== null && previousHomeNotes !== '') {
                 setHomeNotes(JSON.parse(previousHomeNotes));
                 previousArrayValue = JSON.parse(previousHomeNotes)
                 const newNotes = [...previousArrayValue, note];
                 await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
+                let HomeNotesCount = newNotes.length;
+                await AsyncStorage.setItem("HomeNotesCount", HomeNotesCount.toString());
               } else {
 
                 setHomeNotes([]);
                 const newNotes = [...homeNotes, note];
                 await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
+                let HomeNotesCount = newNotes.length;
+                await AsyncStorage.setItem("HomeNotesCount", HomeNotesCount.toString());
               }
 
-              const newNotes = [...homeNotes, note];
-              let HomeNotesCount = newNotes.length;
-              await AsyncStorage.setItem("HomeNotesCount", HomeNotesCount.toString());
+              // const newNotes = [...homeNotes, note];
+              // let HomeNotesCount = newNotes.length;
+              // await AsyncStorage.setItem("HomeNotesCount", HomeNotesCount.toString());
               setNote({ title: '', description: '' });
+
+
             } catch (error) {
               console.error("Error:", error);
             }
@@ -97,62 +103,59 @@ const AddNotesScreen = () => {
 
           else if (notesCatagory === 'Office') {
 
-            try{
-              console.log("try Entered");
-
+            try {
               let previousOfficeNotes = await AsyncStorage.getItem('OfficeNotes');
               let previousArrayValue = [];
-              if(previousOfficeNotes !== null && previousOfficeNotes !== ''){
-                console.log("If Entered");
-                console.log("previousOfficeNotes" + previousOfficeNotes);
+              
+              if (previousOfficeNotes !== null && previousOfficeNotes !== '') {
                 setOfficeNotes(JSON.parse(previousOfficeNotes))
                 previousArrayValue = JSON.parse(previousOfficeNotes);
                 const newNotes = [...previousArrayValue, note]
                 await AsyncStorage.setItem('OfficeNotes', JSON.stringify(newNotes));
+                let OfficeNotesCount = newNotes.length;
+                await AsyncStorage.setItem("OfficeNotesCount", OfficeNotesCount.toString());
+
               }
-              else{
-
-                console.log("Else Entered");
-
+              else {
                 setOfficeNotes([]);
                 const newNotes = [...OfficeNotes, note]
-
-                console.log("newOffice notes", newNotes);
                 await AsyncStorage.setItem('OfficeNotes', JSON.stringify(newNotes));
+                let OfficeNotesCount = newNotes.length;
+                await AsyncStorage.setItem("OfficeNotesCount", OfficeNotesCount.toString());
               }
 
-              const newNotes = [...OfficeNotes, note];
-              let OfficeNotesCount = newNotes.length;
-              await AsyncStorage.setItem("OfficeNotesCount", OfficeNotesCount.toString());
               setNote({ title: '', description: '' });
 
-            }catch(error){
+            } catch (error) {
               console.log("Error: ", error);
             }
           }
 
           else if (notesCatagory === 'Work') {
-            try{
+            try {
               let previousWorkNotes = await AsyncStorage.getItem('WorkNotes');
               let previousArrayValue = [];
-              if(previousWorkNotes !== null && previousWorkNotes !== ''){
+              if (previousWorkNotes !== null && previousWorkNotes !== '') {
                 setWorkNotes(JSON.parse(previousWorkNotes));
                 previousArrayValue = JSON.parse(previousWorkNotes);
                 const newNotes = [...previousArrayValue, note];
                 await AsyncStorage.setItem('WorkNotes', JSON.stringify(newNotes));
+                let WorkNotesCount = newNotes.length;
+                await AsyncStorage.setItem("WorkNotesCount", WorkNotesCount.toString());
               }
-              else{
+              else {
                 setWorkNotes([]);
                 const newNotes = [...workNotes, note]
                 await AsyncStorage.setItem('WorkNotes', JSON.stringify(newNotes));
+                let WorkNotesCount = newNotes.length;
+                await AsyncStorage.setItem("WorkNotesCount", WorkNotesCount.toString());
               }
 
-              const newNotes = [...workNotes, note];
-              let WorkNotesCount = newNotes.length;
-              await AsyncStorage.setItem("WorkNotesCount", WorkNotesCount.toString());
+              // const newNotes = [...workNotes, note];
+
               setNote({ title: '', description: '' });
 
-            }catch(error){
+            } catch (error) {
               console.log("Error: ", error);
             }
 
@@ -160,30 +163,29 @@ const AddNotesScreen = () => {
 
           else if (notesCatagory === 'Health') {
 
-            try{
+            try {
               let previousHealthNotes = await AsyncStorage.getItem('HealthNotes');
               let previousArrayValue = [];
-              if(previousHealthNotes !== null && previousHealthNotes !== ''){
+              if (previousHealthNotes !== null && previousHealthNotes !== '') {
                 setWorkNotes(JSON.parse(previousHealthNotes));
                 previousArrayValue = JSON.parse(previousHealthNotes);
                 const newNotes = [...previousArrayValue, note];
                 await AsyncStorage.setItem('HealthNotes', JSON.stringify(newNotes));
+                let HealthNotesCount = newNotes.length;
+                await AsyncStorage.setItem("HealthNotesCount", HealthNotesCount.toString());
               }
-              else{
+              else {
                 setHealthNotes([]);
                 const newNotes = [...healthNotes, note]
                 await AsyncStorage.setItem('HealthNotes', JSON.stringify(newNotes));
+                let HealthNotesCount = newNotes.length;
+                await AsyncStorage.setItem("HealthNotesCount", HealthNotesCount.toString());
               }
-
-              const newNotes = [...healthNotes, note];
-              let HealthNotesCount = newNotes.length;
-              await AsyncStorage.setItem("HealthNotesCount", HealthNotesCount.toString());
               setNote({ title: '', description: '' });
 
-            }catch(error){
+            } catch (error) {
               console.log("Error: ", error);
             }
-
           }
           Alert.alert("Success", "Your notes are saved");
         }
