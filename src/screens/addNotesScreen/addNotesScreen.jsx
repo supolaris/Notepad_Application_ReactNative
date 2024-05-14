@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Pressable, Image, StatusBar, Alert, SafeAreaView } from 'react-native';
-
-import { NotepadAppColors } from '../../components/colors/NotepadColors';
+import React, { useState } from 'react';
+import { Alert } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
 import ImagePicker from 'react-native-image-picker';
 import { launchImageLibrary } from 'react-native-image-picker';
 
-import AddNotesScreenUi from '../../components/ui/AddNotesScreenUi';
+import AddNotesScreenUi from '../../components/ui/AddNotes';
 
 // import FastImage from 'react-native-fast-image';
 
@@ -44,14 +42,6 @@ const AddNotesScreen = () => {
   // AsyncStorage.removeItem("OfficeNotes");
   // AsyncStorage.removeItem("HealthNotes");
   // AsyncStorage.removeItem("WorkNotes");
-
-
-  //   const getData = async () => {
-  //     const homeData = await AsyncStorage.getItem("OfficeNotes");
-  //     console.log("Office Data: " + homeData);
-  //   }
-
-  //   getData();
 
   // }, [])
 

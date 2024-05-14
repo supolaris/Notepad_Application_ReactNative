@@ -1,4 +1,4 @@
-import StartupScreenUi from '../../components/ui/StartupScreenUi';
+import StartupScreenUi from '../../components/ui/Startup';
 //import {useNavigation} from '@react-navigation/native';
 
 import {useAppNavigation} from '../../@types/AppNavigation';

@@ -4,7 +4,7 @@ import {useFocusEffect} from '@react-navigation/native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import HomeScreenUi from '../../components/ui/HomeScreenUi';
+import HomeScreenUi from '../../components/ui/Home';
 
 import {useAppNavigation} from '../../@types/AppNavigation';
 
@@ -20,31 +20,27 @@ const HomeScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      const getNotesCount = async () => {
-        const HomeNotesCount: any = await AsyncStorage.getItem(
-          'HomeNotesCount',
-        );
-        setHomeCount(HomeNotesCount);
-
-        const OfficeNotesCount: any = await AsyncStorage.getItem(
-          'OfficeNotesCount',
-        );
-        setOfficeCount(OfficeNotesCount);
-
-        const WorkNotesCount: any = await AsyncStorage.getItem(
-          'WorkNotesCount',
-        );
-        setWorkCount(WorkNotesCount);
-
-        const HealthNotesCount: any = await AsyncStorage.getItem(
-          'HealthNotesCount',
-        );
-        setHealthCount(HealthNotesCount);
-      };
-
       getNotesCount();
     }, []),
   );
+
+  const getNotesCount = async () => {
+    const HomeNotesCount: any = await AsyncStorage.getItem('HomeNotesCount');
+    setHomeCount(HomeNotesCount);
+
+    const OfficeNotesCount: any = await AsyncStorage.getItem(
+      'OfficeNotesCount',
+    );
+    setOfficeCount(OfficeNotesCount);
+
+    const WorkNotesCount: any = await AsyncStorage.getItem('WorkNotesCount');
+    setWorkCount(WorkNotesCount);
+
+    const HealthNotesCount: any = await AsyncStorage.getItem(
+      'HealthNotesCount',
+    );
+    setHealthCount(HealthNotesCount);
+  };
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

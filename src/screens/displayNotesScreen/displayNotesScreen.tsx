@@ -1,13 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Image,
-  Pressable,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 
 import Header from '../../components/header/Header';
 
@@ -17,7 +9,7 @@ import {useFocusEffect} from '@react-navigation/native';
 
 import {LogBox} from 'react-native';
 
-import DisplayNotesScreenUi from '../../components/ui/DisplayNotesScreenUi';
+import DisplayNotesScreenUi from '../../components/ui/DisplayNotes';
 
 LogBox.ignoreLogs(["ReactImageView: Image source '' doesn't exist"]);
 
