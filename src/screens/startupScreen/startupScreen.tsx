@@ -11,6 +11,10 @@ import { useNavigation } from '@react-navigation/native';
 
 const StartupScreen = () => {
 
+
+
+
+
     const navigation = useNavigation();
 
     const onGetStartedPressed = () => {

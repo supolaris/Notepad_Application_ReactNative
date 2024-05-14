@@ -28,9 +28,20 @@ const AddNotesScreen = () => {
 
   useEffect(() => {
 
+    // AsyncStorage.removeItem("HomeNotesCount");
+    // AsyncStorage.removeItem("OfficeNotesCount");
+    // AsyncStorage.removeItem("HealthNotesCount");
+    // AsyncStorage.removeItem("WorkNotesCount");
+
+    // AsyncStorage.removeItem("HomeNotes");
+    // AsyncStorage.removeItem("OfficeNotes");
+    // AsyncStorage.removeItem("HealthNotes");
+    // AsyncStorage.removeItem("WorkNotes");
+
+
     const getData = async () => {
-      const homeData = await AsyncStorage.getItem("HomeNotes");
-      console.log("Home Data: " + homeData);
+      const homeData = await AsyncStorage.getItem("OfficeNotes");
+      console.log("Office Data: " + homeData);
     }
 
     getData();
@@ -62,20 +73,14 @@ const AddNotesScreen = () => {
             try {
               const previousHomeNotes = await AsyncStorage.getItem("HomeNotes");
 
-              //console.log("Previous note", previousHomeNotes);
              let previousArrayValue = [] 
               if (previousHomeNotes !== null && previousHomeNotes !== '') {
-                //console.log('Condition passed');
                 setHomeNotes(JSON.parse(previousHomeNotes));
                 previousArrayValue = JSON.parse(previousHomeNotes)
                 const newNotes = [...previousArrayValue, note];
-
-                //console.log('new notes'+ JSON.stringify(newNotes));
-
                 await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
-
               } else {
-                //console.log("Else entered");
+
                 setHomeNotes([]);
                 const newNotes = [...homeNotes, note];
                 await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
@@ -84,7 +89,6 @@ const AddNotesScreen = () => {
               const newNotes = [...homeNotes, note];
               let HomeNotesCount = newNotes.length;
               await AsyncStorage.setItem("HomeNotesCount", HomeNotesCount.toString());
-
               setNote({ title: '', description: '' });
             } catch (error) {
               console.error("Error:", error);
@@ -92,36 +96,94 @@ const AddNotesScreen = () => {
           }
 
           else if (notesCatagory === 'Office') {
-            const newNotes = [...OfficeNotes, note];
-            await AsyncStorage.setItem('OfficeNotes', JSON.stringify(newNotes));
-            setOfficeNotes(newNotes);
 
-            let WorkNotesCount = newNotes.length;
-            await AsyncStorage.setItem("OfficeNotesCount", WorkNotesCount.toString());
+            try{
+              console.log("try Entered");
 
-            setNote({ title: '', description: '' })
+              let previousOfficeNotes = await AsyncStorage.getItem('OfficeNotes');
+              let previousArrayValue = [];
+              if(previousOfficeNotes !== null && previousOfficeNotes !== ''){
+                console.log("If Entered");
+                console.log("previousOfficeNotes" + previousOfficeNotes);
+                setOfficeNotes(JSON.parse(previousOfficeNotes))
+                previousArrayValue = JSON.parse(previousOfficeNotes);
+                const newNotes = [...previousArrayValue, note]
+                await AsyncStorage.setItem('OfficeNotes', JSON.stringify(newNotes));
+              }
+              else{
+
+                console.log("Else Entered");
+
+                setOfficeNotes([]);
+                const newNotes = [...OfficeNotes, note]
+
+                console.log("newOffice notes", newNotes);
+                await AsyncStorage.setItem('OfficeNotes', JSON.stringify(newNotes));
+              }
+
+              const newNotes = [...OfficeNotes, note];
+              let OfficeNotesCount = newNotes.length;
+              await AsyncStorage.setItem("OfficeNotesCount", OfficeNotesCount.toString());
+              setNote({ title: '', description: '' });
+
+            }catch(error){
+              console.log("Error: ", error);
+            }
           }
 
           else if (notesCatagory === 'Work') {
-            const newNotes = [...workNotes, note];
-            await AsyncStorage.setItem('WorkNotes', JSON.stringify(newNotes));
-            setWorkNotes(newNotes);
+            try{
+              let previousWorkNotes = await AsyncStorage.getItem('WorkNotes');
+              let previousArrayValue = [];
+              if(previousWorkNotes !== null && previousWorkNotes !== ''){
+                setWorkNotes(JSON.parse(previousWorkNotes));
+                previousArrayValue = JSON.parse(previousWorkNotes);
+                const newNotes = [...previousArrayValue, note];
+                await AsyncStorage.setItem('WorkNotes', JSON.stringify(newNotes));
+              }
+              else{
+                setWorkNotes([]);
+                const newNotes = [...workNotes, note]
+                await AsyncStorage.setItem('WorkNotes', JSON.stringify(newNotes));
+              }
 
-            let WorkNotesCount = newNotes.length;
-            await AsyncStorage.setItem("WorkNotesCount", WorkNotesCount.toString());
+              const newNotes = [...workNotes, note];
+              let WorkNotesCount = newNotes.length;
+              await AsyncStorage.setItem("WorkNotesCount", WorkNotesCount.toString());
+              setNote({ title: '', description: '' });
 
-            setNote({ title: '', description: '' })
+            }catch(error){
+              console.log("Error: ", error);
+            }
+
           }
 
           else if (notesCatagory === 'Health') {
-            const newNotes = [...healthNotes, note];
-            await AsyncStorage.setItem('HealthNotes', JSON.stringify(newNotes));
-            setHealthNotes(newNotes);
 
-            let WorkNotesCount = newNotes.length;
-            await AsyncStorage.setItem("HealthNotesCount", WorkNotesCount.toString());
+            try{
+              let previousHealthNotes = await AsyncStorage.getItem('HealthNotes');
+              let previousArrayValue = [];
+              if(previousHealthNotes !== null && previousHealthNotes !== ''){
+                setWorkNotes(JSON.parse(previousHealthNotes));
+                previousArrayValue = JSON.parse(previousHealthNotes);
+                const newNotes = [...previousArrayValue, note];
+                await AsyncStorage.setItem('HealthNotes', JSON.stringify(newNotes));
+              }
+              else{
+                setHealthNotes([]);
+                const newNotes = [...healthNotes, note]
+                await AsyncStorage.setItem('HealthNotes', JSON.stringify(newNotes));
+              }
 
-            setNote({ title: '', description: '' })
+              const newNotes = [...healthNotes, note];
+              let HealthNotesCount = newNotes.length;
+              await AsyncStorage.setItem("HealthNotesCount", HealthNotesCount.toString());
+              setNote({ title: '', description: '' });
+
+            }catch(error){
+              console.log("Error: ", error);
+            }
+
           }
           Alert.alert("Success", "Your notes are saved");
         }
