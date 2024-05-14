@@ -1,11 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { RefreshControl, View, Text, StyleSheet, ScrollView, Pressable, Image, StatusBar } from 'react-native';
-
-import LinearGradient from 'react-native-linear-gradient';
-
-import AddLottie from '../../components/lottie/addLottie';
-
-import { NotepadAppColors } from '../../components/colors/notepadColors';
+import React, { useState, useCallback } from 'react';
 
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
@@ -30,13 +23,13 @@ const HomeScreen = () => {
             const getNotesCount = async () => {
                 const HomeNotesCount: any = await AsyncStorage.getItem("HomeNotesCount");
                 setHomeCount(HomeNotesCount);
-    
+
                 const OfficeNotesCount: any = await AsyncStorage.getItem("OfficeNotesCount");
                 setOfficeCount(OfficeNotesCount);
-    
+
                 const WorkNotesCount: any = await AsyncStorage.getItem("WorkNotesCount");
                 setWorkCount(WorkNotesCount);
-    
+
                 const HealthNotesCount: any = await AsyncStorage.getItem("HealthNotesCount");
                 setHealthCount(HealthNotesCount);
             }
@@ -53,209 +46,61 @@ const HomeScreen = () => {
         }, 1000);
     }, []);
 
+    // Home Catagory pressed
+    const onHomeCatagoryPressed = () => {
+        navigation.navigate('DisplayNotes_Screen', { catagoryName: 'HomeNotes' })
+    }
+
+    // Office Catagory pressed
+    const onOfficeCatagoryPressed = () => {
+        navigation.navigate('DisplayNotes_Screen', { catagoryName: 'HomeNotes' })
+    }
+
+    // Office Catagory pressed
+    const onWorkCatagoryPressed = () => {
+        navigation.navigate('DisplayNotes_Screen', { catagoryName: 'HomeNotes' })
+    }
+
+    // Office Catagory pressed
+    const onHealthCatagoryPressed = () => {
+        navigation.navigate('DisplayNotes_Screen', { catagoryName: 'HomeNotes' })
+    }
+
+    // Add notes button pressed
     const onAddNotesPressed = () => {
         navigation.navigate("AddNotes_Screen");
     }
 
     return (
-        <View style={styles.container}>
-            <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
-            <ScrollView
-                contentContainerStyle={{ flex: 1 }}
-                refreshControl={
-                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                }>
-                <LinearGradient colors={['#fde4f2', '#ffffff', '#ffffff', '#ececec', '#671B61']} style={styles.linearGradient}>
+        <HomeScreenUi
 
-                    <View style={styles.titleCatagoriesView}>
-                        <View style={styles.titleView}>
-                            <Text style={styles.titleText}>Notes Catagories</Text>
-                        </View>
+            refreshing={refreshing}
+            onRefresh={onRefresh}
 
-                        <View style={styles.catagoriesView}>
-                            <View style={styles.catagoryOneView}>
+            title='Notes Catagories'
+            homeCount={homeCount}
 
-                                <View>
-                                    <Text style={{textAlign: 'center', fontSize: 18, color: 'black', fontWeight: 'bold'}}>{homeCount}</Text>
-                                </View>
+            onHomeCatagoryPressed={onHomeCatagoryPressed}
+            homeCatagoryName='Home'
 
-                                <Pressable
-                                    onPress={() => navigation.navigate('DisplayNotes_Screen', { catagoryName: 'HomeNotes' })}>
-                                    <View style={styles.imageView}>
-                                        <Image
-                                            style={[styles.image, { marginBottom: 2 }]}
-                                            source={require('../../../assets/images/houseCatagory.png')} />
-                                    </View>
-                                    <View style={styles.catgoriesTitleView}>
-                                        <Text style={[styles.catagoriesTitleText, { borderBottomRightRadius: 20 }]}>Home</Text>
-                                    </View>
-                                </Pressable>
+            officeCount={officeCount}
+            onOfficeCatagoryPressed={onOfficeCatagoryPressed}
+            officeCatagoryName='Office'
 
-                            </View>
+            onWorkCatagoryPressed={onWorkCatagoryPressed}
+            workCatagoryName='Work'
+            workCount={workCount}
 
-                            <View style={styles.catagoryTwoView}>
+            onHealthCatagoryPressed={onHealthCatagoryPressed}
+            healthCatagoryName='Health'
+            healthCount={healthCount}
 
-                            <View>
-                                    <Text style={{textAlign: 'center', fontSize: 18, color: 'black', fontWeight: 'bold'}}>{officeCount}</Text>
-                                </View>
+            onAddNotesPressed={onAddNotesPressed}
+            buttonText='Add notes'
+        />
 
-                                <Pressable
-                                    onPress={() => navigation.navigate('DisplayNotes_Screen', { catagoryName: 'OfficeNotes' })}>
-                                    <View style={styles.imageView}>
-                                        <Image
-                                            style={styles.image}
-                                            source={require('../../../assets/images/officeCatagory.png')} />
-                                    </View>
-                                    <View style={styles.catgoriesTitleView}>
-                                        <Text style={[styles.catagoriesTitleText, { borderBottomLeftRadius: 20 }]}>Office</Text>
-                                    </View>
-                                </Pressable>
-                            </View>
-
-                        </View>
-
-                        <View style={styles.catagoriesView}>
-                            <View style={styles.catagoryThreeView}>
-
-                                <Pressable
-                                    onPress={() => navigation.navigate('DisplayNotes_Screen', { catagoryName: 'WorkNotes' })}>
-                                    <View style={styles.catgoriesTitleView}>
-                                        <Text style={[styles.catagoriesTitleText, { borderTopRightRadius: 20 }]}>Work</Text>
-                                    </View>
-                                    <View style={styles.imageView}>
-                                        <Image
-                                            style={styles.image}
-                                            source={require('../../../assets/images/workCatagory.png')} />
-                                    </View>
-                                </Pressable>
-                                <View>
-                                    <Text style={{textAlign: 'center', fontSize: 18, color: 'black', fontWeight: 'bold'}}>{workCount}</Text>
-                                </View>
-
-
-                            </View>
-
-                            <View style={styles.catagoryFourView}>
-
-                                
-                                <Pressable
-                                    onPress={() => navigation.navigate('DisplayNotes_Screen', { catagoryName: 'HealthNotes' })}>
-                                    <View style={styles.catgoriesTitleView}>
-
-                                        <Text style={[styles.catagoriesTitleText, { borderTopLeftRadius: 20 }]}>Health</Text>
-                                    </View>
-                                    <View style={styles.imageView}>
-                                        <Image
-                                            style={[styles.image]}
-                                            source={require('../../../assets/images/healthCatagory.png')} />
-                                    </View>
-                                </Pressable>
-
-                                <View>
-                                    <Text style={{textAlign: 'center', fontSize: 18, color: 'black', fontWeight: 'bold'}}>{healthCount}</Text>
-                                </View>
-
-                            </View>
-
-                        </View>
-
-                    </View>
-
-                    <View style={styles.lottieTextView}>
-                        <Pressable
-                            onPress={onAddNotesPressed}
-                            style={styles.pressable}>
-                            <AddLottie />
-                        </Pressable>
-                        <Text style={styles.addNotesText}>Add notes</Text>
-                    </View>
-
-                </LinearGradient>
-            </ScrollView>
-
-        </View>
     )
 }
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    linearGradient: {
-        flex: 1
-    },
-    titleCatagoriesView: {
-        paddingTop: 30,
-        justifyContent: 'center'
-    },
-    titleView: {
-        alignItems: 'center',
-        paddingBottom: 20,
-    },
-    titleText: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        color: NotepadAppColors.black
-    },
-    catagoriesView: {
-        paddingHorizontal: 15,
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        marginVertical: 10
-    },
-    catagoryOneView: {
-        marginHorizontal: 30,
-        borderWidth: 0.9,
-        borderBottomRightRadius: 20
-    },
-    catagoryTwoView: {
-        marginHorizontal: 30,
-        borderWidth: 0.9,
-        borderBottomLeftRadius: 20,
-    },
-    catagoryThreeView: {
-        marginHorizontal: 30,
-        borderWidth: 0.9,
-        borderTopRightRadius: 20
-    },
-    catagoryFourView: {
-        marginHorizontal: 30,
-        borderWidth: 0.9,
-        borderTopLeftRadius: 20
-    },
-    imageView: {
-        paddingHorizontal: 10,
-        paddingTop: 20
-    },
-    image: {
-        height: 150,
-        width: 150
-    },
-    catgoriesTitleView: {
-
-    },
-    catagoriesTitleText: {
-        fontSize: 25,
-        fontWeight: 'bold',
-        color: NotepadAppColors.white,
-        backgroundColor: NotepadAppColors.lightBlue,
-        textAlign: 'center'
-    },
-
-    lottieTextView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingBottom: 10
-    },
-    pressable: {
-
-    },
-    addNotesText: {
-        fontSize: 30,
-        color: NotepadAppColors.white
-    },
-
-})
