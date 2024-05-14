@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import PlusIcon from 'react-native-vector-icons/AntDesign';
-import { NotepadAppColors } from '../colors/notepadColors';
+import { NotepadAppColors } from '../colors/NotepadColors';
 
 
 const Header = () => {

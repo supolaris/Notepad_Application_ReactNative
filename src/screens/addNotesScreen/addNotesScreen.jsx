@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Pressable, Image, StatusBar, Alert, SafeAreaView } from 'react-native';
 
-import { NotepadAppColors } from '../../components/colors/notepadColors';
+import { NotepadAppColors } from '../../components/colors/NotepadColors';
 
 import { useNavigation } from '@react-navigation/native';
 

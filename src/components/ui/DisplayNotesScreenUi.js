@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { NotepadAppColors } from '../colors/notepadColors';
+import { NotepadAppColors } from '../colors/NotepadColors';
 
 const DisplayNotesScreenUi = (props) => {
 

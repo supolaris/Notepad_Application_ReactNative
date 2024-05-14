@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable, StatusBar } from 'react-native';
-import { NotepadAppColors } from '../../components/colors/notepadColors';
+import { NotepadAppColors } from '../colors/NotepadColors';
 
 import LinearGradient from 'react-native-linear-gradient';
 
-import StartupLottie from '../../components/lottie/startupLottie';
+import StartupLottie from '../lottie/StartupLottie';
 import ArrowIcon from 'react-native-vector-icons/FontAwesome6';
 
 const StartupScreenUi = (props) => {

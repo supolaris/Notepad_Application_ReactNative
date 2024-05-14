@@ -3,9 +3,9 @@ import { RefreshControl, View, Text, StyleSheet, ScrollView, Pressable, Image, S
 
 import LinearGradient from 'react-native-linear-gradient';
 
-import AddLottie from '../../components/lottie/addLottie';
+import AddLottie from '../lottie/AddLottie';
 
-import { NotepadAppColors } from '../../components/colors/notepadColors';
+import { NotepadAppColors } from '../colors/NotepadColors';
 
 
 const HomeScreenUi = (props) => {
@@ -35,8 +35,8 @@ const HomeScreenUi = (props) => {
                             onPress={props.onHomeCatagoryPressed}>
                             <View style={styles.imageView}>
                                 <Image
-                                    style={[styles.image, { marginBottom: 2 }]}
-                                    source={require('../../../assets/images/houseCatagory.png')} />
+                                    style={[styles.image, { marginBottom: 2, height: 148 }]}
+                                    source={require('../../assets/images/houseCatagory.png')} />
                             </View>
                             <View style={styles.catgoriesTitleView}>
                                 <Text style={[styles.catagoriesTitleText, { borderBottomRightRadius: 20 }]}>{props.homeCatagoryName}</Text>
@@ -56,7 +56,7 @@ const HomeScreenUi = (props) => {
                             <View style={styles.imageView}>
                                 <Image
                                     style={styles.image}
-                                    source={require('../../../assets/images/officeCatagory.png')} />
+                                    source={require('../../assets/images/officeCatagory.png')} />
                             </View>
                             <View style={styles.catgoriesTitleView}>
                                 <Text style={[styles.catagoriesTitleText, { borderBottomLeftRadius: 20 }]}>{props.officeCatagoryName}</Text>
@@ -77,7 +77,7 @@ const HomeScreenUi = (props) => {
                             <View style={styles.imageView}>
                                 <Image
                                     style={styles.image}
-                                    source={require('../../../assets/images/workCatagory.png')} />
+                                    source={require('../../assets/images/workCatagory.png')} />
                             </View>
                         </Pressable>
                         <View>
@@ -99,7 +99,7 @@ const HomeScreenUi = (props) => {
                             <View style={styles.imageView}>
                                 <Image
                                     style={[styles.image]}
-                                    source={require('../../../assets/images/healthCatagory.png')} />
+                                    source={require('../../assets/images/healthCatagory.png')} />
                             </View>
                         </Pressable>
 

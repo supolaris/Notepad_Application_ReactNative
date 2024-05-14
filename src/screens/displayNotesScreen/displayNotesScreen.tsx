@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Pressable, TouchableOpacity } from 'react-native';
 
-import Header from '../../components/header/header';
+import Header from '../../components/header/Header';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
