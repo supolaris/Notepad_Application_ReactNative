@@ -1,13 +1,15 @@
 import React, {useState, useCallback} from 'react';
 
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import HomeScreenUi from '../../components/ui/HomeScreenUi';
 
+import {useAppNavigation} from '../../@types/AppNavigation';
+
 const HomeScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useAppNavigation();
 
   const [refreshing, setRefreshing] = useState(false);
 
