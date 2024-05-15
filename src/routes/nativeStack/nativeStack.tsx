@@ -1,16 +1,14 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 
-import StartupScreen from '../../../screens/StartupScreen/StartupScreen';
-import HomeScreen from '../../../screens/HomeScreen/HomeScreen';
-import AddNotesScreen from '../../../screens/AddNotesScreen/AddNotesScreen';
-import DisplayNotesScreen from '../../../screens/DisplayNotesScreen/DisplayNotesScreen';
+import StartupScreen from '../../screens/StartupScreen/StartupScreen';
+import HomeScreen from '../../screens/HomeScreen/HomeScreen';
+import AddNotesScreen from '../../screens/AddNotesScreen/AddNotesScreen';
+import DisplayNotesScreen from '../../screens/DisplayNotesScreen/DisplayNotesScreen';
 
-import {NativeStackParamsList} from '../../../@types/NavigationTypes';
+import {NativeStackParamsList} from '../../@types/NavigationTypes';
 
 const Stack = createNativeStackNavigator<NativeStackParamsList>();
-
-// const Stack = createNativeStackNavigator();
 
 function MyNativeStack() {
   return (

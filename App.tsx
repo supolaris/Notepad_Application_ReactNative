@@ -1,9 +1,7 @@
-import MyNativeStack from "./src/routes/navigation/nativeStack/nativeStack";
+import MyNativeStack from './src/routes/nativeStack/nativeStack';
 
-const App = () =>{
-  return(
-    <MyNativeStack />
-  )
-}
+const App = () => {
+  return <MyNativeStack />;
+};
 
 export default App;

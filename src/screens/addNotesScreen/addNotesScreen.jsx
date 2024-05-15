@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Alert } from 'react-native';
+import React, {useState} from 'react';
+import {Alert} from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 import ImagePicker from 'react-native-image-picker';
-import { launchImageLibrary } from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 import AddNotesScreenUi from '../../components/ui/AddNotes';
 
@@ -12,17 +12,19 @@ import AddNotesScreenUi from '../../components/ui/AddNotes';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { LogBox } from 'react-native';
+import {LogBox} from 'react-native';
 
-LogBox.ignoreLogs(['ReactImageView: Image source \"\" doesn\'t exist']);
-LogBox.ignoreLogs(['source.uri should not be an empty string']);
+LogBox.ignoreLogs([
+  'ReactImageView: Image source "" doesn\'t exist',
+  'source.uri should not be an empty string',
+]);
 
 const AddNotesScreen = () => {
   //const dummyImage = require('../../../assets/images/houseCatagory.png');
 
   const navigation = useNavigation();
 
-  const [note, setNote] = useState({ title: '', description: '', image: '' });
+  const [note, setNote] = useState({title: '', description: '', image: ''});
 
   const [homeNotes, setHomeNotes] = useState([]);
   const [OfficeNotes, setOfficeNotes] = useState([]);
@@ -47,212 +49,227 @@ const AddNotesScreen = () => {
 
   const selectImage = async () => {
     const result = await launchImageLibrary();
-    setNote({ ...note, image: result?.assets[0]?.uri })
+    setNote({...note, image: result?.assets[0]?.uri});
   };
 
   const onSavePressed = async () => {
-
     if (!note.title) {
-      Alert.alert("Invalid input", "Enter title")
-    }
-    else {
+      Alert.alert('Invalid input', 'Enter title');
+    } else {
       if (!note.description) {
-        Alert.alert("Invalid input", "Enter description")
-      }
-      else {
+        Alert.alert('Invalid input', 'Enter description');
+      } else {
         if (!notesCatagory) {
-          Alert.alert("Invalid Input", "Select catagory")
-        }
-        else {
+          Alert.alert('Invalid Input', 'Select catagory');
+        } else {
           if (notesCatagory === 'Home') {
             try {
-              const previousHomeNotes = await AsyncStorage.getItem("HomeNotes");
-              let HomeNotesCount
-              let previousArrayValue = []
+              const previousHomeNotes = await AsyncStorage.getItem('HomeNotes');
+              let HomeNotesCount;
+              let previousArrayValue = [];
               if (previousHomeNotes !== null && previousHomeNotes !== '') {
                 setHomeNotes(JSON.parse(previousHomeNotes));
-                previousArrayValue = JSON.parse(previousHomeNotes)
+                previousArrayValue = JSON.parse(previousHomeNotes);
                 const newNotes = [...previousArrayValue, note];
-                await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
+                await AsyncStorage.setItem(
+                  'HomeNotes',
+                  JSON.stringify(newNotes),
+                );
                 HomeNotesCount = newNotes.length;
-                await AsyncStorage.setItem("HomeNotesCount", HomeNotesCount.toString());
+                await AsyncStorage.setItem(
+                  'HomeNotesCount',
+                  HomeNotesCount.toString(),
+                );
               } else {
-
                 setHomeNotes([]);
                 const newNotes = [...homeNotes, note];
-                await AsyncStorage.setItem('HomeNotes', JSON.stringify(newNotes));
+                await AsyncStorage.setItem(
+                  'HomeNotes',
+                  JSON.stringify(newNotes),
+                );
                 HomeNotesCount = newNotes.length;
-                await AsyncStorage.setItem("HomeNotesCount", HomeNotesCount.toString());
+                await AsyncStorage.setItem(
+                  'HomeNotesCount',
+                  HomeNotesCount.toString(),
+                );
               }
-              setNote({ title: '', description: '' });
-
+              setNote({title: '', description: ''});
             } catch (error) {
-              console.error("Error:", error);
+              console.error('Error:', error);
             }
-          }
-
-          else if (notesCatagory === 'Office') {
-
+          } else if (notesCatagory === 'Office') {
             try {
-              let previousOfficeNotes = await AsyncStorage.getItem('OfficeNotes');
+              let previousOfficeNotes = await AsyncStorage.getItem(
+                'OfficeNotes',
+              );
               let previousArrayValue = [];
-              let OfficeNotesCount
+              let OfficeNotesCount;
 
               if (previousOfficeNotes !== null && previousOfficeNotes !== '') {
-                setOfficeNotes(JSON.parse(previousOfficeNotes))
+                setOfficeNotes(JSON.parse(previousOfficeNotes));
                 previousArrayValue = JSON.parse(previousOfficeNotes);
-                const newNotes = [...previousArrayValue, note]
-                await AsyncStorage.setItem('OfficeNotes', JSON.stringify(newNotes));
+                const newNotes = [...previousArrayValue, note];
+                await AsyncStorage.setItem(
+                  'OfficeNotes',
+                  JSON.stringify(newNotes),
+                );
                 OfficeNotesCount = newNotes.length;
-                await AsyncStorage.setItem("OfficeNotesCount", OfficeNotesCount.toString());
-
-              }
-              else {
+                await AsyncStorage.setItem(
+                  'OfficeNotesCount',
+                  OfficeNotesCount.toString(),
+                );
+              } else {
                 setOfficeNotes([]);
-                const newNotes = [...OfficeNotes, note]
-                await AsyncStorage.setItem('OfficeNotes', JSON.stringify(newNotes));
+                const newNotes = [...OfficeNotes, note];
+                await AsyncStorage.setItem(
+                  'OfficeNotes',
+                  JSON.stringify(newNotes),
+                );
                 OfficeNotesCount = newNotes.length;
-                await AsyncStorage.setItem("OfficeNotesCount", OfficeNotesCount.toString());
+                await AsyncStorage.setItem(
+                  'OfficeNotesCount',
+                  OfficeNotesCount.toString(),
+                );
               }
 
-              setNote({ title: '', description: '' });
-
+              setNote({title: '', description: ''});
             } catch (error) {
-              console.log("Error: ", error);
+              console.log('Error: ', error);
             }
-          }
-
-          else if (notesCatagory === 'Work') {
+          } else if (notesCatagory === 'Work') {
             try {
               let previousWorkNotes = await AsyncStorage.getItem('WorkNotes');
               let previousArrayValue = [];
-              let WorkNotesCount
+              let WorkNotesCount;
               if (previousWorkNotes !== null && previousWorkNotes !== '') {
                 setWorkNotes(JSON.parse(previousWorkNotes));
                 previousArrayValue = JSON.parse(previousWorkNotes);
                 const newNotes = [...previousArrayValue, note];
-                await AsyncStorage.setItem('WorkNotes', JSON.stringify(newNotes));
+                await AsyncStorage.setItem(
+                  'WorkNotes',
+                  JSON.stringify(newNotes),
+                );
                 WorkNotesCount = newNotes.length;
-                await AsyncStorage.setItem("WorkNotesCount", WorkNotesCount.toString());
-              }
-              else {
+                await AsyncStorage.setItem(
+                  'WorkNotesCount',
+                  WorkNotesCount.toString(),
+                );
+              } else {
                 setWorkNotes([]);
-                const newNotes = [...workNotes, note]
-                await AsyncStorage.setItem('WorkNotes', JSON.stringify(newNotes));
+                const newNotes = [...workNotes, note];
+                await AsyncStorage.setItem(
+                  'WorkNotes',
+                  JSON.stringify(newNotes),
+                );
                 WorkNotesCount = newNotes.length;
-                await AsyncStorage.setItem("WorkNotesCount", WorkNotesCount.toString());
+                await AsyncStorage.setItem(
+                  'WorkNotesCount',
+                  WorkNotesCount.toString(),
+                );
               }
-              setNote({ title: '', description: '' });
-
+              setNote({title: '', description: ''});
             } catch (error) {
-              console.log("Error: ", error);
+              console.log('Error: ', error);
             }
-
-          }
-
-          else if (notesCatagory === 'Health') {
-
+          } else if (notesCatagory === 'Health') {
             try {
-              let previousHealthNotes = await AsyncStorage.getItem('HealthNotes');
+              let previousHealthNotes = await AsyncStorage.getItem(
+                'HealthNotes',
+              );
               let previousArrayValue = [];
-              let HealthNotesCount
+              let HealthNotesCount;
               if (previousHealthNotes !== null && previousHealthNotes !== '') {
                 setWorkNotes(JSON.parse(previousHealthNotes));
                 previousArrayValue = JSON.parse(previousHealthNotes);
                 const newNotes = [...previousArrayValue, note];
-                await AsyncStorage.setItem('HealthNotes', JSON.stringify(newNotes));
+                await AsyncStorage.setItem(
+                  'HealthNotes',
+                  JSON.stringify(newNotes),
+                );
                 HealthNotesCount = newNotes.length;
-                await AsyncStorage.setItem("HealthNotesCount", HealthNotesCount.toString());
-              }
-              else {
+                await AsyncStorage.setItem(
+                  'HealthNotesCount',
+                  HealthNotesCount.toString(),
+                );
+              } else {
                 setHealthNotes([]);
-                const newNotes = [...healthNotes, note]
-                await AsyncStorage.setItem('HealthNotes', JSON.stringify(newNotes));
+                const newNotes = [...healthNotes, note];
+                await AsyncStorage.setItem(
+                  'HealthNotes',
+                  JSON.stringify(newNotes),
+                );
                 HealthNotesCount = newNotes.length;
-                await AsyncStorage.setItem("HealthNotesCount", HealthNotesCount.toString());
+                await AsyncStorage.setItem(
+                  'HealthNotesCount',
+                  HealthNotesCount.toString(),
+                );
               }
-              setNote({ title: '', description: '' });
-
+              setNote({title: '', description: ''});
             } catch (error) {
-              console.log("Error: ", error);
+              console.log('Error: ', error);
             }
           }
-          Alert.alert("Success", "Your notes are saved");
+          Alert.alert('Success', 'Your notes are saved');
         }
       }
     }
   };
 
-  const descriptionFunction = (text) => {
-    setNote({ ...note, description: text })
-  }
+  const descriptionFunction = text => {
+    setNote({...note, description: text});
+  };
 
-  const titleFunction = (text) => {
-    setNote({ ...note, title: text })
-  }
+  const titleFunction = text => {
+    setNote({...note, title: text});
+  };
 
   const onHomeCatagorySelect = () => {
     setNotesCatagory('Home');
-  }
+  };
 
   const onOfficeCatagorySelect = () => {
     setNotesCatagory('Office');
-  }
+  };
 
   const onWorkCatagorySelect = () => {
     setNotesCatagory('Work');
-  }
+  };
 
   const onHealthCatagorySelect = () => {
     setNotesCatagory('Health');
-  }
+  };
 
   const onViewNotesPressed = () => {
     navigation.navigate('Home_Screen');
-  }
+  };
 
   return (
-
-    <AddNotesScreenUi 
-    title='Add Notes'
-    selectImage={selectImage}
-    imageSource={{ uri: note.image }}
-    uploadText='Upload'
-
-    titleValue={note.title}
-    titleFunction={titleFunction}
-
-    descriptionValue={note.description}
-    descriptionFunction={descriptionFunction}
-
-    catagoryText='Select Catagory'
-
-    onHomeCatagorySelect={onHomeCatagorySelect}
-    homeCatagoryName='Home'
-
-    officeCatagoryName='Office'
-    onOfficeCatagorySelect={onOfficeCatagorySelect}
-
-    workCatagoryName='Work'
-    onWorkCatagorySelect={onWorkCatagorySelect}
-
-    healthCatagoryName='Health'
-    onHealthCatagorySelect={onHealthCatagorySelect}
-
-    catagoryMention='Selected Catagory:'
-    notesCatagory={notesCatagory}
-
-    onSavePressed={onSavePressed}
-    buttonText='Save'
-
-    onViewNotesPressed={onViewNotesPressed}
-    viewNotesText='View Notes'
-    
-    
+    <AddNotesScreenUi
+      title="Add Notes"
+      selectImage={selectImage}
+      imageSource={{uri: note.image}}
+      uploadText="Upload"
+      titleValue={note.title}
+      titleFunction={titleFunction}
+      descriptionValue={note.description}
+      descriptionFunction={descriptionFunction}
+      catagoryText="Select Catagory"
+      onHomeCatagorySelect={onHomeCatagorySelect}
+      homeCatagoryName="Home"
+      officeCatagoryName="Office"
+      onOfficeCatagorySelect={onOfficeCatagorySelect}
+      workCatagoryName="Work"
+      onWorkCatagorySelect={onWorkCatagorySelect}
+      healthCatagoryName="Health"
+      onHealthCatagorySelect={onHealthCatagorySelect}
+      catagoryMention="Selected Catagory:"
+      notesCatagory={notesCatagory}
+      onSavePressed={onSavePressed}
+      buttonText="Save"
+      onViewNotesPressed={onViewNotesPressed}
+      viewNotesText="View Notes"
     />
-
-  )
-}
+  );
+};
 
 export default AddNotesScreen;
-
